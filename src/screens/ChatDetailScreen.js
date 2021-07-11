@@ -69,9 +69,12 @@ const ChatChild = ({ text, date, type, ...props }) =>
     //  const dispatch = useDispatch()
     return (
 
-        <TouchableHighlight underlayColor="#DDDDDD" style={{ alignSelf: type == 1 ? 'flex-end' : 'flex-start', borderTopStartRadius: type == 1 ? 10 : 30, borderTopRightRadius: type == 2 ? 10 : 30, borderRadius: 10, borderWidth: 1, borderColor: 'black', 'padding': 10, 'margin': 5, 'marginTop': 10 }} onPress={() =>
+        <TouchableHighlight underlayColor="#DDDDDD" style={{ alignSelf: type == 1 ? 'flex-end' : 'flex-start', 
+        borderTopStartRadius: type == 1 ? 10 : 30, borderTopRightRadius: type == 2 ? 10 : 30, 
+        borderRadius: 10, borderWidth: 0,
+        backgroundColor: type == 1 ? 'tomato' : '#f2f2f2', 
+        borderColor: 'black', 'padding': 10, 'margin': 5, 'marginTop': 10 }} onPress={() =>
         {
-
             console.log('tes')
         }}>
             <View style={{ width: '85%', 'display': 'flex', 'flexDirection': type == 1 ? 'row-reverse' : 'row' }}>
@@ -86,9 +89,11 @@ const ChatChild = ({ text, date, type, ...props }) =>
                     }} /> */}
                 </View>
                 <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 10 }}>
-                    <Text style={{ alignSelf: type == 1 ? 'flex-end' : 'flex-start', fontSize: 14, fontWeight: '900', color: 'tomato' }}>{type == 1 ? 'You' : 'Dokternya'}</Text>
-                    <Text style={{ fontSize: 14, fontWeight: '300' }}>{text}</Text>
-                    <Text style={{ alignSelf: type == 1 ? 'flex-end' : 'flex-start', fontSize: 10, fontWeight: '800', color: "#2e2e2e" }}>{date}</Text>
+                    <Text style={{ alignSelf: type == 1 ? 'flex-end' : 'flex-start', 
+                        color:type == 1 ? 'black' : 'tomato',
+                    fontSize: 15, fontWeight: 'bold' }}>{type == 1 ? 'You' : 'Dokternya'}</Text>
+                    <Text style={{ color:type == 1 ? 'white' : 'black', fontSize: 14, fontWeight: '300' }}>{text}</Text>
+                    <Text style={{ color:type == 1 ? 'white' : 'black', alignSelf: type == 1 ? 'flex-end' : 'flex-start', fontSize: 10, fontWeight: '800'}}>{date}</Text>
                 </View>
             </View>
         </TouchableHighlight>
@@ -111,20 +116,20 @@ const ChatDetailScreen = () =>
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <View style={{ display: 'flex', 'flexDirection': 'column', height: '100%', backgroundColor: 'white', justifyContent: 'space-between' }}>
                 <FlatListBasics chat={chatState} />
-                <View style={{ display: 'flex', backgroundColor: "white", flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ display: 'flex', backgroundColor: 'transparent', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View
                         style={{
+                            elevation:5,
                             borderRadius: 20,
                             padding: 5,
                             flex: 1,
                             backgroundColor: 'white',
-                            margin: 10, shadowRadius: 3,paddingHorizontal:20, shadowOpacity: 0.5, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
+                            marginVertical:5,marginHorizontal:5, shadowRadius: 3,paddingHorizontal:20, shadowOpacity: 0.5, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
 
                         }}>
                         <UselessTextInput
                             style={{ paddingHorizontal: 10, paddingVertical: 5 }}
                             multiline
-                            numberOfLines={4}
                             onChangeText={(text) => setInputChatState(text)}
                             value={inputChat}
 

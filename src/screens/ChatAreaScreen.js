@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableHighlight, Image, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableHighlight, Image, FlatList, TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
+import { BaseButton, RawButton, RectButton, TextInput } from 'react-native-gesture-handler';
 
 
 
@@ -11,10 +10,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderColor:'#dddddd',
-        borderWidth:1,
+        borderWidth:0.5,
         borderRadius:10,
-        padding: 10,
-        shadowRadius: 3, shadowOpacity: 0.2, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',
+        shadowRadius: 3, shadowOpacity: 0.2, 
+        shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',
         margin: 20,
         backgroundColor:'white'
     },
@@ -52,12 +51,14 @@ const DokterChild = ({ navigation, name, status, ...props }) =>
      
     return (
             
-        <TouchableHighlight underlayColor="#DDDDDD" style={{ 'padding': 20, 'borderBottomColor': '#dddddd', borderBottomWidth: 1 }} onPress={() => {
-            navigation.navigate('ChatDetail',{ name: name });
-           
+        <RectButton 
+        
+        style={{ borderColor: '#dddddd' }}   onPress={() => {
+            // console.log('ehhe');
             
+            navigation.navigate('ChatDetail',{ name: name });
             }}>
-            <View style={{ 'display': 'flex', 'flexDirection': 'row' }}>
+            <View style={{ 'display': 'flex', 'flexDirection': 'row',padding:20,borderBottomWidth:1,borderBottomColor:'#dddddd' }}>
                 <Image source={require('../assets/ayodokter.png')} style={{
                     width: 50,
                     height: 50,
@@ -71,7 +72,7 @@ const DokterChild = ({ navigation, name, status, ...props }) =>
                     <Text style={{ fontSize: 14, fontWeight: '800', color: "#2e2e2e" }}>{status}</Text>
                 </View>
             </View>
-        </TouchableHighlight>
+        </RectButton>
     )
 }
 
@@ -81,7 +82,6 @@ const UselessTextInput = (props) =>
         <TextInput
             {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
             editable
-            maxLength={40}
             placeholder="cari dokter kamu !"
         />
     );
@@ -95,22 +95,17 @@ const ChatAreaScreen = ({ navigation }) =>
             {/* <ScrollView > */}
 
             <View
-
+                elevation={3}
                 style={{
                     borderRadius: 20,
-                    padding: 10,
-
+                    
                     backgroundColor: 'white',
                     margin: 20, shadowRadius: 3, shadowOpacity: 0.2, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
 
                 }}>
                 <UselessTextInput
-                    style={{ paddingHorizontal: 10, paddingVertical: 5 }}
-                    multiline
-                    numberOfLines={4}
+                    style={{ paddingHorizontal: 15, paddingVertical: 10 }}
                     onChangeText={(text) => console.log(text)}
-
-
                 />
             </View>
             <FlatListBasics navigation={navigation} />

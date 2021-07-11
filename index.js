@@ -31,7 +31,6 @@ export default function Main()
 
     <Provider store={store} >
       <PaperProvider theme={theme}>
-
         <App />
       </PaperProvider >
     </Provider >

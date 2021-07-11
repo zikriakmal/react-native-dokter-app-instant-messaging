@@ -102,8 +102,9 @@ const App = () =>
       <Tab.Navigator
         activeColor="tomato"
         inactiveColor="grey"
+      
         barStyle={{ backgroundColor: '#ffffff',
-        shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'  
+        elevation:24,shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'  
       }}
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size=22 }) =>

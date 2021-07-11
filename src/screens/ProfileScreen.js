@@ -30,7 +30,7 @@ const ProfileScreen = ({ navigation }) =>
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <ScrollView >
-                <View style={{ borderRadius: 10, alignContent: 'center', alignItems: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }} >
+                <View style={{ elevation:10,borderRadius: 10, alignContent: 'center', alignItems: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }} >
                     <View style={{ 'alignSelf': 'flex-end' }} >
                         <Ionicons name='pencil' onPress={() => { alert('woi bujang enam') }} style={{ fontSize: 20, fontWeight: '900' }} />
                     </View>
@@ -52,13 +52,13 @@ const ProfileScreen = ({ navigation }) =>
                         <HyperChild />
                     </View>
                 </View>
-                <View style={{ alignContent: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 10, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }} >
+                <View   style={{borderRadius: 10, alignContent: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 10, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',elevation:10 }} >
                     <Text style={{ textAlign: 'center', fontSize: 22, fontWeight: '700' }}> Data Diri</Text>
                     <Text style={{ fontSize: 14, 'marginTop': 20 }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam luctus tincidunt erat non blandit. Nullam nec ipsum id erat imperdiet placerat. Integer pellentesque sit amet nibh id egestas. Fusce quis sollicitudin massa. Praesent a quam in velit posuere commodo. Morbi mattis nisi placerat felis suscipit congue. Donec fringilla dolor a tellus auctor, eu maximus eros tempor.
                     </Text>
 
                 </View>
-                <Button dark={true} theme={{roundness:20}} style={{ 'paddingVertical': 5, 'margin': 10, 'marginLeft': 15, 'marginRight': 15, 'marginBottom': 20, 'marginTop': 10 }} mode="contained" onPress={storeData}>
+                <Button dark={true} theme={{roundness:20}} contentStyle={{height:45}} style={{  'margin': 10, 'marginLeft': 15, 'marginRight': 15, 'marginBottom': 20, 'marginTop': 10 }} mode="contained" onPress={storeData}>
                     Keluar
                 </Button>
             </ScrollView>

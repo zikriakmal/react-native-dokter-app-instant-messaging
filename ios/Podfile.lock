@@ -255,7 +255,7 @@ PODS:
     - React-jsi (= 0.64.2)
     - React-perflogger (= 0.64.2)
   - React-jsinspector (0.64.2)
-  - react-native-mmkv (1.2.0):
+  - react-native-mmkv (1.1.6):
     - MMKV
     - React-Core
   - react-native-safe-area-context (3.2.0):
@@ -547,7 +547,7 @@ SPEC CHECKSUMS:
   React-jsi: 67747b9722f6dab2ffe15b011bcf6b3f2c3f1427
   React-jsiexecutor: 80c46bd381fd06e418e0d4f53672dc1d1945c4c3
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
-  react-native-mmkv: b91a1e6384e0f07498b6dd8a577dae21989c4888
+  react-native-mmkv: 3c7db3a68afb5be477e5231729da0e714afe1277
   react-native-safe-area-context: e471852c5ed67eea4b10c5d9d43c1cebae3b231d
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
@@ -570,6 +570,6 @@ SPEC CHECKSUMS:
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: da5cf7c1d223dd744c4c2c1c5c65e9d85eaae14c
+PODFILE CHECKSUM: 0aafad028a9a73e4431aa4db978b7e97ccea1247
 
 COCOAPODS: 1.10.1
