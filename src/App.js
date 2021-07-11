@@ -10,11 +10,11 @@
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React, { useState, useEffect } from 'react';
-import{ useColorScheme,} from 'react-native';
+import { useColorScheme, } from 'react-native';
 
-import{Colors} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import LoginPage from './screens/LoginPage';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -24,11 +24,17 @@ import RegisterScreen from './screens/RegisterScreen';
 import HomePage from './screens/HomePage';
 import ChatAreaScreen from './screens/ChatAreaScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import { MMKV } from 'react-native-mmkv';
-
-
 import { Provider, useSelector } from 'react-redux';
-import {store} from './redux/store'
+import { store } from './redux/store'
+import ChatDetailScreen from './screens/ChatDetailScreen';
+import { createAnimatedPropAdapter } from 'react-native-reanimated';
+import { Transition } from 'react-native-reanimated';
+
+
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+
+
 
 
 const tes = () =>
@@ -57,10 +63,13 @@ const App = () =>
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const globalState = useSelector(state => state)
 
+  const globalState = useSelector(state => state)
   const AuthStack = createStackNavigator();
-  const Tab = createBottomTabNavigator();
+  const Tab = createMaterialBottomTabNavigator();
+  const GuardedStack = createStackNavigator();
+  // console.log(globalState.chatReducers);
+
 
   const AuthStackScreen = () =>
   {
@@ -73,12 +82,31 @@ const App = () =>
     )
   }
 
+  const HomeScreen = () =>
+  {
+
+    return (
+      <GuardedStack.Navigator>
+        <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false,title:"" }} />
+        <GuardedStack.Screen name="ChatScreen" component={ChatAreaScreen} options={{ headerShown: false }} />
+        <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
+        {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
+      </GuardedStack.Navigator>
+    )
+  }
+
+
   const TabScreen = () =>
   {
     return (
       <Tab.Navigator
+        activeColor="tomato"
+        inactiveColor="grey"
+        barStyle={{ backgroundColor: '#ffffff',
+        shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'  
+      }}
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) =>
+          tabBarIcon: ({ focused, color, size=22 }) =>
           {
             let iconName;
 
@@ -94,30 +122,32 @@ const App = () =>
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
-        tabBarOptions={{
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray',
-          showLabel: false
-        }}
+        
 
       >
-        <Tab.Screen name="ChatArea" component={ChatAreaScreen} />
-        <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Tab.Screen name="ChatArea" component={ChatAreaScreen} options={{tabBarLabel:'Chat'}} />
+        <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{tabBarLabel:'Profile'}} />
+
       </Tab.Navigator>
 
     )
   }
 
-  return (
-      <NavigationContainer theme={MyTheme}>
-        {globalState.isLogin ? <TabScreen /> : <AuthStackScreen />}
 
-        {/* <Tab.Navigator>
+
+
+
+
+  return (
+    <NavigationContainer theme={MyTheme}>
+      {globalState.reducers.isLogin ? <HomeScreen /> : <AuthStackScreen />}
+
+      {/* <Tab.Navigator>
         <Tab.Screen name="Login" component={LoginPage} />
         <Tab.Screen name="Register" component={RegisterScreen} />
       </Tab.Navigator>
         <Button onPress={tes} title="tes" />  */}
-      </NavigationContainer>
+    </NavigationContainer>
   );
 };
 
