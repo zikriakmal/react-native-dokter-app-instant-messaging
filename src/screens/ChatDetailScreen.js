@@ -116,7 +116,7 @@ const ChatDetailScreen = () =>
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <View style={{ display: 'flex', 'flexDirection': 'column', height: '100%', backgroundColor: 'white', justifyContent: 'space-between' }}>
                 <FlatListBasics chat={chatState} />
-                <View style={{ display: 'flex', backgroundColor: 'transparent', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ display: 'flex', backgroundColor: 'transparent', flexDirection: 'row', justifyContent: 'space-between',marginBottom:10 }}>
                     <View
                         style={{
                             elevation:5,
@@ -124,18 +124,18 @@ const ChatDetailScreen = () =>
                             padding: 5,
                             flex: 1,
                             backgroundColor: 'white',
-                            marginVertical:5,marginHorizontal:5, shadowRadius: 3,paddingHorizontal:20, shadowOpacity: 0.5, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
+                            marginHorizontal:5, 
+                            shadowRadius: 3,
+                            paddingHorizontal:20, shadowOpacity: 0.5, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
 
                         }}>
                         <UselessTextInput
-                            style={{ paddingHorizontal: 10, paddingVertical: 5 }}
                             multiline
                             onChangeText={(text) => setInputChatState(text)}
                             value={inputChat}
 
                         />
                     </View>
-
                         <TouchableHighlight
                             disabled={inputChat == ""}
                             underlayColor='#dddddd'
@@ -145,7 +145,7 @@ const ChatDetailScreen = () =>
                                 borderRadius: 20,
                                 padding: 5,
                                 backgroundColor: 'tomato',
-                                margin: 10, shadowRadius: 3, shadowOpacity: 0.2, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
+                                marginHorizontal: 10, shadowRadius: 3, shadowOpacity: 0.2, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
 
                             }}
 

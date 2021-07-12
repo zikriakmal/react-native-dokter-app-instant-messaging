@@ -13,25 +13,24 @@ import React, { useState, useEffect } from 'react';
 import { useColorScheme, } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import LoginPage from './screens/LoginPage';
 import { NavigationContainer, DefaultTheme, useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
 import { firebase } from '../firebase';
-import RegisterScreen from './screens/RegisterScreen';
-import HomePage from './screens/HomePage';
-import ChatAreaScreen from './screens/ChatAreaScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import { Provider, useSelector } from 'react-redux';
-import { store } from './redux/store'
-import ChatDetailScreen from './screens/ChatDetailScreen';
-import { createAnimatedPropAdapter } from 'react-native-reanimated';
-import { Transition } from 'react-native-reanimated';
 
+
+import RegisterScreen from './screens/RegisterScreen';
+import ChatAreaScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import LoginPage from './screens/LoginPage';
+
+import { Provider, useSelector } from 'react-redux';
+
+import ChatDetailScreen from './screens/ChatDetailScreen';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import HomeScreen from './screens/HomeScreen';
 
 
 
@@ -77,18 +76,17 @@ const App = () =>
       <AuthStack.Navigator>
         <AuthStack.Screen name="Login" component={LoginPage} options={{ headerShown: false }} />
         <AuthStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-        <AuthStack.Screen name="Homepage" component={HomePage} options={{ headerShown: false }} />
       </AuthStack.Navigator>
     )
   }
 
-  const HomeScreen = () =>
+  const GuardedScreen = () =>
   {
 
     return (
       <GuardedStack.Navigator>
         <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false,title:"" }} />
-        <GuardedStack.Screen name="ChatScreen" component={ChatAreaScreen} options={{ headerShown: false }} />
+        <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
       </GuardedStack.Navigator>
@@ -113,10 +111,12 @@ const App = () =>
 
             if (route.name === 'ChatArea') {
               iconName = focused
-                ? 'chatbubbles'
-                : 'chatbubbles-outline';
+                ? 'home'
+                : 'home-outline';
             } else if (route.name === 'ProfileScreen') {
               iconName = focused ? 'person-circle' : 'person-circle-outline';
+            }else if(route.name ==='ChatScreen'){
+              iconName = focused ? 'chatbubbles' : 'chatbubbles-outline'
             }
 
             // You can return any component that you like here!
@@ -126,7 +126,8 @@ const App = () =>
         
 
       >
-        <Tab.Screen name="ChatArea" component={ChatAreaScreen} options={{tabBarLabel:'Chat'}} />
+        <Tab.Screen name="ChatArea" component={ChatAreaScreen} options={{tabBarLabel:'Home'}} />
+        <Tab.Screen name="ChatScreen" component={ProfileScreen} options={{tabBarLabel:'Chats'}} />
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{tabBarLabel:'Profile'}} />
 
       </Tab.Navigator>
@@ -141,7 +142,7 @@ const App = () =>
 
   return (
     <NavigationContainer theme={MyTheme}>
-      {globalState.reducers.isLogin ? <HomeScreen /> : <AuthStackScreen />}
+      {globalState.reducers.isLogin ? <GuardedScreen /> : <AuthStackScreen />}
 
       {/* <Tab.Navigator>
         <Tab.Screen name="Login" component={LoginPage} />
