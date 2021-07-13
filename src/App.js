@@ -31,8 +31,11 @@ import ChatDetailScreen from './screens/ChatDetailScreen';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
-
-
+import { LogBox } from 'react-native';
+import ChatHistoryScreen from './screens/ChatHistoryScreen';
+import AppointmentScreen from './screens/AppointmentScreen';
+import AskDoctorScreen from './screens/AskDoctorScreen';
+import DoctorNotesScreen from './screens/DoctorNotesScreen';
 
 
 
@@ -57,6 +60,11 @@ const MyTheme = {
 
 const App = () =>
 {
+  useEffect(() =>
+  {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, [])
+
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -85,9 +93,16 @@ const App = () =>
 
     return (
       <GuardedStack.Navigator>
-        <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false,title:"" }} />
+        <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
         <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
+
+        <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen}  />
+        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  />
+        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen}  />
+
+
+
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
       </GuardedStack.Navigator>
     )
@@ -100,22 +115,23 @@ const App = () =>
       <Tab.Navigator
         activeColor="tomato"
         inactiveColor="grey"
-      
-        barStyle={{ backgroundColor: '#ffffff',
-        elevation:24,shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'  
-      }}
+         
+        barStyle={{
+          backgroundColor: '#ffffff',
+          elevation: 24, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
+        }}
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size=22 }) =>
+          tabBarIcon: ({ focused, color, size = 22 }) =>
           {
             let iconName;
 
-            if (route.name === 'ChatArea') {
+            if (route.name === 'HomeScreen') {
               iconName = focused
                 ? 'home'
                 : 'home-outline';
             } else if (route.name === 'ProfileScreen') {
               iconName = focused ? 'person-circle' : 'person-circle-outline';
-            }else if(route.name ==='ChatScreen'){
+            } else if (route.name === 'ChatScreen') {
               iconName = focused ? 'chatbubbles' : 'chatbubbles-outline'
             }
 
@@ -123,12 +139,12 @@ const App = () =>
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
-        
+
 
       >
-        <Tab.Screen name="ChatArea" component={ChatAreaScreen} options={{tabBarLabel:'Home'}} />
-        <Tab.Screen name="ChatScreen" component={ProfileScreen} options={{tabBarLabel:'Chats'}} />
-        <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{tabBarLabel:'Profile'}} />
+        <Tab.Screen name="HomeScreen" component={HomeScreen}  options={{tabBarLabel: 'Home'}} />
+        <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{ tabBarLabel: 'Chats' }} />
+        <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{ tabBarLabel: 'Profile' }} />
 
       </Tab.Navigator>
 

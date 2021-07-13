@@ -5,7 +5,7 @@ import { View, Text } from 'react-native'
 import LoginPage from './LoginPage';
 import RegisterScreen from './RegisterScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ChatAreaScreen from './ChatAreaScreen';
+import ChatAreaScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
 
 

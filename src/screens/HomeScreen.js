@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { View, Text, SafeAreaView, ScrollView, TouchableHighlight, Image, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { StyleSheet } from 'react-native';
 import { BaseButton, RawButton, RectButton, TextInput } from 'react-native-gesture-handler';
-import { Avatar } from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
+import { Avatar, Button, TouchableRipple } from 'react-native-paper';
 
 
 
@@ -10,9 +11,9 @@ import { Avatar } from 'react-native-paper';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         borderColor: '#dddddd',
-        height:500,
+        height: 500,
         borderWidth: 0.5,
         borderRadius: 10,
         shadowRadius: 3, shadowOpacity: 0.2,
@@ -70,7 +71,7 @@ const DokterChild = ({ navigation, name, status, ...props }) =>
 
     return (
         <RectButton
-            style={{ borderColor: '#dddddd' }} onPress={() =>
+            style={{ borderColor: '#dddddd' }} rippleColor="#FF826B" onPress={() =>
             {
                 // console.log('ehhe');
                 navigation.navigate('ChatDetail', { name: name });
@@ -148,19 +149,24 @@ const HomeScreen = ({ navigation }) =>
                 topBounceColor="tomato"
                 bottomBounceColor="white"
             >
-                <ScrollView nestedScrollEnabled={true} style={{ flex: 1 }}>
+                <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}>
                     <View style={{ 'backgroundColor': 'white' }}>
-                        <View style={{
-                            height: 160, borderBottomStartRadius: 50,
+                        <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}}  colors={[  'tomato', '#FF826B','#ffb1a3']} 
+                        style={{
+                            backgroundColor:'white',
+                            height: 160, 
+                            borderBottomLeftRadius:50,
+                            borderBottomRightRadius:50,
+                            borderBottomStartRadius: 50,
+                            borderBottomEndRadius: 50 ,
                             padding: 20,
-                            borderBottomEndRadius: 50, backgroundColor: 'tomato'
                         }}>
                             {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
                             <View style={{ display: 'flex', flexDirection: 'row' }}>
                                 <Avatar.Image size={50} source={require('../assets/ayodokter.png')} />
                                 <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>Halo nugasyah</Text>
                             </View>
-                        </View>
+                        </LinearGradient>
                         <View style={{ zIndex: 2, marginTop: -75, margin: 20 }} >
                             <View style={{
                                 // justifyContent: 'center',
@@ -170,39 +176,69 @@ const HomeScreen = ({ navigation }) =>
                                 borderRadius: 10, backgroundColor: 'white', marginVertical: 20, paddingHorizontal: 30, paddingVertical: 20, shadowRadius: 3, shadowOpacity: 0.2,
                                 shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',
                             }}>
-                                <View style={{display:'flex',flex:1}}>
-                                    <Avatar.Icon elevation={5} size={50} color={'white'} icon="calendar" style={
-                                        {
-                                            alignSelf:'center',
-                                            shadowRadius: 4, shadowOpacity: 0.4,
-                                            shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
-                                        }
-                                    } />
-                                    <Text style={{'alignSelf':'center','fontWeight':'600','marginTop':10}}>Buat Janji</Text>
+                                <View style={{ display: 'flex', flex: 1 }}>
+                                    <TouchableRipple
+                                        borderless={true}
+                                        style={{ borderRadius: 20, padding: 10 }}
+                                        onPress={() => navigation.navigate('AppointmentScreen')}
+                                        rippleColor="#FF826B"
+                                    >
+                                        <View>
+                                            <Avatar.Icon elevation={5} size={50} color={'white'} icon="calendar" style={
+                                                {
+                                                    alignSelf: 'center',
+                                                    shadowRadius: 4, shadowOpacity: 0.4,
+                                                    shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
+                                                }
+                                            } />
+                                            <Text style={{ 'alignSelf': 'center', 'fontWeight': '600', 'marginTop': 10 }}>Buat Janji</Text>
+                                        </View>
+                                    </TouchableRipple>
                                 </View>
-                                
-                                <View style={{display:'flex',flex:1}}>
-                                    <Avatar.Icon elevation={5} size={50} color={'white'} icon="comment-edit" style={
-                                        {
-                                            alignSelf:'center',
-                                            shadowRadius: 4, shadowOpacity: 0.4,
-                                            shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
-                                        }
-                                    } />
-                                    <Text style={{'alignSelf':'center','fontWeight':'600','marginTop':10}}>Tanya Dokter</Text>
+
+                                <View style={{ display: 'flex', flex: 1 }}>
+                                    <TouchableRipple
+                                        borderless={true}
+                                        style={{ borderRadius: 20, padding: 10 }}
+                                        onPress={() => navigation.navigate('AskDoctorScreen')}
+                                        rippleColor="#FF826B"
+                                    >
+
+                                        <View>
+                                            <Avatar.Icon elevation={5} size={50} color={'white'} icon="comment-edit" style={
+                                                {
+                                                    alignSelf: 'center',
+                                                    shadowRadius: 4, shadowOpacity: 0.4,
+                                                    shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
+                                                }
+                                            } />
+                                            <Text style={{ 'alignSelf': 'center', 'fontWeight': '600', 'marginTop': 10 }}>Tanya Dokter</Text>
+
+                                        </View>
+                                    </TouchableRipple>
                                 </View>
-                                
-                                <View style={{display:'flex',flex:1}}>
-                                    <Avatar.Icon elevation={5} size={50} color={'white'} icon="note" style={
-                                        {
-                                            alignSelf:'center',
-                                            shadowRadius: 4, shadowOpacity: 0.4,
-                                            shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
-                                        }
-                                    } />
-                                    <Text style={{'alignSelf':'center','fontWeight':'600','marginTop':10}}>Catatan Dokter</Text>
+
+                                <View style={{ display: 'flex', flex: 1 }}>
+                                    <TouchableRipple
+                                        borderless={true}
+                                        style={{ borderRadius: 20, padding: 10 }}
+                                        onPress={() => navigation.navigate('DoctorNotesScreen')}
+                                        rippleColor="#FF826B"
+                                    >
+                                        <View>
+
+                                            <Avatar.Icon elevation={5} size={50} color={'white'} icon="note" style={
+                                                {
+                                                    alignSelf: 'center',
+                                                    shadowRadius: 4, shadowOpacity: 0.4,
+                                                    shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
+                                                }
+                                            } />
+                                            <Text style={{ 'alignSelf': 'center', 'fontWeight': '600', 'marginTop': 10 }}>Catatan Dokter</Text>
+                                        </View>
+                                    </TouchableRipple>
                                 </View>
-                                
+
 
                             </View>
                             <FlatListBasics navigation={navigation} />
