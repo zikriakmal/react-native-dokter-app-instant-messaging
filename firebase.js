@@ -13,11 +13,12 @@ var firebaseConfig = {
     measurementId: "G-BPNQ78VHSX"
   };
 
-
   if (firebase.apps.length === 0){
       firebase.initializeApp(firebaseConfig);
   }
 
+
+  firebase.firestore().settings({ experimentalForceLongPolling: true });
 
   
 export { firebase };
