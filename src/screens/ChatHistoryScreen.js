@@ -5,8 +5,7 @@ import ChatChildComponent from '../component/atoms/ChatChildComponent';
 import Swipeout from 'react-native-swipeout';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
-
-import { firebase } from '../../firebase';
+import firestore from '@react-native-firebase/firestore';
 
 
 // Buttons
@@ -16,8 +15,6 @@ let swipeoutBtns = [
         onPress: () => { alert('hehe') }
     }
 ]
-
-
 
 const data = [
     { id: '1', name: 'Dokter Subandono', lastChat: 'Lagi apa nue' },
@@ -41,7 +38,7 @@ const ChatHistoryScreen = ({ navigation }) =>
     // useEffect(() =>
     // {
 
-    const db = firebase.firestore();
+    const db = firestore();
     const query = db.collection('users').doc("userId1").collection("chats");
 
     useEffect(() =>
@@ -53,25 +50,41 @@ const ChatHistoryScreen = ({ navigation }) =>
             // Get all documents from collection - with IDs
             const fetchedTasks = [];
 
-            querySnapshot.docs.forEach(childSnapshot =>
+            querySnapshot.docChanges().forEach((change) =>
             {
 
-                // const query2 = db.collection('doctors').doc(childSnapshot.id);
-                // const doc = query2.onSnapshot((hogs) =>
-                // {
-                    // return doc;
-                    const key = childSnapshot.id;
-                    const data = childSnapshot.data();
-                    fetchedTasks.push({ id: key, nama: username, ...data });
-                    setChats(fetchedTasks);
-                // });
+
+                if (change.type === 'added') {
+
+                    const query2 = db.collection('doctors').doc(change.doc.id);
+                    const doc = query2.get().then((hogs) =>
+                    {
+                        const key = change.doc.id;
+                        const data = change.doc.data();
+                        const preve = { id: key, datadoctor: hogs.data(), data }
+                        setChats((prev) => ([...prev, preve]));
+                    });
+                    return () => query2();
+                }
+                if (change.type === 'modified') {
+
+                    const query2 = db.collection('doctors').doc(change.doc.id);
+                    const doc = query2.get().then((hogs) =>
+                    {
+                        const key = change.doc.id;
+                        const data = change.doc.data();
+                        const preve = { id: key, datadoctor: hogs.data(), data }
+                        // setChats((prev) => ([...prev]));
+                    });
+                    return () => query2();
+
+                }
             });
         });
         // Detach listener
-        return unsubscribe;
+        return () => unsubscribe();
     }, []);
 
-    console.log(chats[0])
     return (
         <SafeAreaView style={{ 'flex': 1 }} >
 
@@ -84,9 +97,9 @@ const ChatHistoryScreen = ({ navigation }) =>
                     <RectButton
                         style={{ borderColor: '#dddddd' }} rippleColor="#FF826B" onPress={() =>
                         {
-                            navigation.navigate('ChatDetail', { name: item.id,id:item.id });
+                            navigation.navigate('ChatDetail', { name: item.datadoctor.name, id: item.id });
                         }}>
-                        <ChatChildComponent style={styles.item} key={item.text} name={item.id} lastChat={item.text} navigation={navigation} />
+                        <ChatChildComponent style={styles.item} key={item.text} name={item.datadoctor.name} lastChat={item.data.last_chat} navigation={navigation} />
                     </RectButton>
                     // </Swipeout> 
 

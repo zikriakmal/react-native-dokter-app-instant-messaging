@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "276092691435",
+    "firebase_url": "https://ayodokter-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ayodokter",
+    "storage_bucket": "ayodokter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276092691435:android:1ce34e94b522d598816fae",
+        "android_client_info": {
+          "package_name": "com.dokterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276092691435-6l24fqsehio8rnt2b3ru2cs5jmgoc1pv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHejyrF_0DBlKsFclDggxl2ifq4EO4DXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276092691435-6l24fqsehio8rnt2b3ru2cs5jmgoc1pv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,6 +25,8 @@ const LoginPage = ({ navigation }) =>
     const storeData = (value) =>
     {
         MMKV.set('isLogin', true)
+        MMKV.set('userId','userId1')
+        MMKV.set('type','1')
         dispatch({ type: 'SET_LOGIN' })
     }
 

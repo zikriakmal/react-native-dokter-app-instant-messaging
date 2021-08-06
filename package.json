@@ -12,10 +12,13 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-firebase/app": "^12.2.0",
+    "@react-native-firebase/firestore": "^12.2.0",
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/material-bottom-tabs": "^5.3.15",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
+    "axios": "^0.21.1",
     "firebase": "^8.7.1",
     "react": "17.0.1",
     "react-native": "0.64.2",

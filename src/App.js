@@ -36,6 +36,7 @@ import ChatHistoryScreen from './screens/ChatHistoryScreen';
 import AppointmentScreen from './screens/AppointmentScreen';
 import AskDoctorScreen from './screens/AskDoctorScreen';
 import DoctorNotesScreen from './screens/DoctorNotesScreen';
+import AppointmentDetailScreen from './screens/AppointmentDetailScreen';
 
 
 
@@ -98,6 +99,11 @@ const App = () =>
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
         <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen}  />
+        <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
+
+
+
+
         <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  />
         <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen}  />
 

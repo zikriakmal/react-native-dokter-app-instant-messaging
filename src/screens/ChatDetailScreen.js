@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { View, Text, TextInput, Button, SafeAreaView, StyleSheet, TouchableHighlight, Image } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { firebase } from '../../firebase'
-
+import firestore from '@react-native-firebase/firestore';
+import { MMKV } from 'react-native-mmkv';
 
 
 
@@ -23,16 +23,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
     },
 });
-
-
-const data = [
-    { id: '1', text: 'Dokter Subandono', date: '19:20:11', type: 1 },
-    { id: '2', text: 'Dokter SitiHajar', date: '19:20:11', type: 2 },
-    { id: '3', text: 'Dokter Ku Ddjalkdsjlfk kocok kocok kocko sajalah kamu ini', date: '19:10:10', type: 2 },
-    { id: '4', text: 'Dokter Nugosyah', date: '19:20:11', type: 1 }
-
-];
-
 
 
 const UselessTextInput = (props) =>
@@ -60,7 +50,7 @@ const FlatListBasics = ({ navigation, chat }) =>
                 ref={myList}
                 onContentSizeChange={() => myList?.current?.scrollToEnd({ animated: true })} // scroll end
                 data={chat}
-                renderItem={({ item }) => <ChatChild style={styles.item} text={item.text} date={item.created_at.toDate().toDateString()} type={item.type} navigation={navigation} />}
+                renderItem={({ item }) => <ChatChild style={styles.item} key={item.data.id} text={item.data.text} date={item.data.created_at.toDate().toDateString()} type={item.data.type} navigation={navigation} />}
             // onScrollAnimationEnd={false}
             />
         </View>)
@@ -113,15 +103,14 @@ const ChatChild = ({ text, date, type, ...props }) =>
 
 const ChatDetailScreen = ({ route, navigation }) =>
 {
-    [chatState, setChatState] = useState(data);
     [inputChat, setInputChatState] = useState("");
     [chats, setChats] = useState([]);
 
+    const userId = MMKV.getString('userId')
+    const type = MMKV.getString('type')
 
-    const db = firebase.firestore();
+    const db = firestore();
     const query = db.collection('users').doc("userId1").collection("chats").doc(route.params.id).collection("chats").orderBy('created_at', 'asc');
-
-
 
     useEffect(() =>
     {
@@ -132,18 +121,22 @@ const ChatDetailScreen = ({ route, navigation }) =>
             // Get all documents from collection - with IDs
             const fetchedTasks = [];
 
-            querySnapshot.docs.forEach(childSnapshot =>
+            querySnapshot.docChanges().forEach((change) =>
             {
                 // return doc;
-                const key = childSnapshot.id;
-                const data = childSnapshot.data();
-                fetchedTasks.push({ id: key, ...data });
-                setChats(fetchedTasks);
+                if (change.type === 'added') {
+                    const key = change.doc.id;
+                    const data = change.doc.data();
+                    const preve = {id:key,data}
+                    setChats((prev)=>([...prev,preve]));
+                }
             });
         });
         // Detach listener
-        return unsubscribe;
+        return ()=>unsubscribe();
     }, []);
+
+    // console.log(chats);
 
     return (
 
@@ -186,19 +179,17 @@ const ChatDetailScreen = ({ route, navigation }) =>
                         onPress={() =>
                         {
 
-                            // Add a new document in collection "cities" with ID 'LA'
-
                             const chats = {
-                                last_chat: "merehe",
+                                last_chat: inputChat,
                             };
-                            const cityRef = db.collection('users').doc("userId1").collection("chats").doc(route.params.id);
-                            const res = cityRef.set(chats);
+                            const cityRef = db.collection('users').doc(userId).collection("chats").doc(route.params.id);
+                            const res = cityRef.update(chats);
 
-                            const cityRef2 = db.collection('users').doc("userId1").collection("chats").doc(route.params.id).collection("chats");
+                            const cityRef2 = db.collection('users').doc(userId).collection("chats").doc(route.params.id).collection("chats");
                             cityRef2.add({
                                 text: inputChat,
-                                created_at: firebase.firestore.Timestamp.fromDate(new Date()),
-                                type: "1"
+                                created_at: firestore.Timestamp.fromDate(new Date()),
+                                type: type 
                             });
 
                             setInputChatState("");

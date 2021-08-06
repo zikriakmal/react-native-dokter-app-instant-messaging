@@ -5,17 +5,11 @@ import { Avatar } from 'react-native-paper';
 
 import MenuComponent from '../component/organisms/MenuComponent';
 import FindDoctorComponent from '../component/organisms/FindDoctorComponent';
-import {firebase} from '../../firebase';
+import firestore from '@react-native-firebase/firestore';
+import { MMKV } from 'react-native-mmkv';
+import Auth from '../services/auth.service';
+import axios from 'axios';
 
-const data = [
-    { id: '1', name: 'Dokter Subandono', status: 'busy' },
-    { id: '2', name: 'Dokter SitiHajar', status: 'online' },
-    { id: '3', name: 'Dokter Ku Doktermu', status: 'offline' },
-    { id: '4', name: 'Dokter Ku Doktermu', status: 'offline' },
-    { id: '5', name: 'Dokter Ku Doktermu', status: 'offline' },
-    { id: '6', name: 'Dokter Ku Doktermu', status: 'offline' },
-    { id: '7', name: 'Dokter Nugosyah', status: 'offline' }
-];
 
 
 const AppScrollViewIOSBounceColorsWrapper = ({
@@ -57,10 +51,23 @@ const HomeScreen = ({ navigation }) =>
 {
     const [loadingState, setLoadingState] = useState(false)
 
-    const db = firebase.firestore();
-    const query = db.collection('doctors');
-    const [doctors,setDoctors]= useState([]);
+    // const db = firebase.firestore();
+    const query = firestore().collection('doctors');
+    const [doctors, setDoctors] = useState([]);
 
+    axios.get('https://jsonplaceholder.typicode.com/posts/1').then(function (response)
+        {
+            console.log(response.data.body);
+        })
+        .catch(function (error)
+        {
+            alert(error.message);
+        })
+        .finally(function ()
+        {
+            // alert('Finally called');
+        });
+        
     useEffect(() =>
     {
         // Subscribe to query with onSnapshot
@@ -82,9 +89,6 @@ const HomeScreen = ({ navigation }) =>
         return unsubscribe;
     }, []);
 
-
-
-
     return (
 
         <LinearGradient style={{
@@ -92,12 +96,10 @@ const HomeScreen = ({ navigation }) =>
             width: Dimensions.get('window').width, overflow: 'hidden', flex: 1
         }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}>
             <SafeAreaView style={{ 'flex': 1 }} >
-
                 <AppScrollViewIOSBounceColorsWrapper
                     style={{ flex: 1 }}
                     topBounceColor="#FF826B"
-                    bottomBounceColor="white"
-                >
+                    bottomBounceColor="white">
                     <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}>
                         <View style={{ 'backgroundColor': 'white' }}>
                             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
@@ -113,7 +115,7 @@ const HomeScreen = ({ navigation }) =>
                                 {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                                     <Avatar.Image size={50} source={require('../assets/ayodokter.png')} />
-                                    <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>Halo nugasyah</Text>
+                                    <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>Halo Ganteng</Text>
                                 </View>
                             </LinearGradient>
                             <View style={{ zIndex: 2, marginTop: -75, margin: 20 }} >

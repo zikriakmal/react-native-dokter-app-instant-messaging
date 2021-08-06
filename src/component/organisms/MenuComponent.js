@@ -21,7 +21,7 @@ const MenuChild = ({ name, icon, navigation, route }) =>
                             shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
                         }
                     } />
-                    <Text style={{ 'alignSelf': 'center', 'fontWeight': '600', 'marginTop': 10 }}>{name}</Text>
+                    <Text style={{ 'alignSelf': 'center','textAlign':'center', 'fontWeight': '600', 'marginTop': 10 }}>{name}</Text>
                 </View>
             </TouchableRipple>
         </View>
