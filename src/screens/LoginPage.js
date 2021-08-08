@@ -8,6 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { Button, TextInput } from 'react-native-paper'
 import { MMKV } from 'react-native-mmkv';
 import { useDispatch, useSelector } from 'react-redux'
+import Auth from '../services/auth.service'
 
 
 
@@ -16,24 +17,31 @@ import { useDispatch, useSelector } from 'react-redux'
 const LoginPage = ({ navigation }) =>
 {
     const [passwordHide, setPasswordHide] = useState(true)
-    //   const backgroundStyle = {
-    //     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    //   };
-    const dispatch = useDispatch()
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const dispatch = useDispatch()
     const globalState = useSelector(state => state)
-    const storeData = (value) =>
+
+    const storeData = () =>
     {
-        MMKV.set('isLogin', true)
-        MMKV.set('userId','userId1')
-        MMKV.set('type','1')
-        dispatch({ type: 'SET_LOGIN' })
+        Auth(email, password).then((data) =>
+        {
+
+            if (data.data.status == "success") {
+                MMKV.set('isLogin', true)
+                MMKV.set('access_token',data.data.data.access_token)
+                MMKV.set('userId','userId1')
+                MMKV.set('type',1)
+                dispatch({type:'SET_LOGIN',token:data.data.data.access_token})
+                return 0;
+            }
+            alert("login gagal");
+        });
+
     }
 
-    useEffect(() =>
-    {
-        console.log(MMKV.getBoolean('isLogin'))
-    })
 
     return (
         <SafeAreaView style={{ 'backgroundColor': 'white', 'height': '100%' }} >
@@ -48,8 +56,11 @@ const LoginPage = ({ navigation }) =>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'margin': 15, 'height': 45 }} />
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password" secureTextEntry={passwordHide} style={{ 'margin': 15, 'height': 45 }} right={<TextInput.Icon name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
+                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'margin': 15, 'height': 45 }} onChangeText={(data) => { setEmail(data) }} />
+                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
+                                onChangeText={(data) => { setPassword(data) }}
+                                secureTextEntry={passwordHide} style={{ 'margin': 15, 'height': 45 }} right={<TextInput.Icon
+                                    name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
                             <Button dark={true} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
@@ -59,7 +70,6 @@ const LoginPage = ({ navigation }) =>
                                 Daftar Disini
                             </Text>
                         </View>
-
                     </View>
                 </ScrollView>
 

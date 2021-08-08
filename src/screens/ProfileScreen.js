@@ -4,7 +4,7 @@ import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
 import { MMKV } from 'react-native-mmkv'
 import { Button } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const HyperChild = () =>
 {
@@ -20,10 +20,15 @@ const HyperChild = () =>
 const ProfileScreen = ({ navigation }) =>
 {
 
+    const global = useSelector(state => state.reducers)
     const dispatch = useDispatch()
+
     const storeData = (value) =>
     {
         MMKV.set('isLogin', false)
+        MMKV.set('username',"")
+        MMKV.set('access_token',"")
+        console.log(MMKV.getString('username'))
         dispatch({ type: 'SET_LOGIN' })
     }
 

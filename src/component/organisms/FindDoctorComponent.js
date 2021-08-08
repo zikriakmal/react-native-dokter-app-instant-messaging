@@ -8,7 +8,7 @@ import { FlatList, RectButton, TextInput } from 'react-native-gesture-handler';
 
 
 
-const DokterChild = ({ navigation,id, name, status, ...props }) =>
+const DokterChild = ({ navigation,id, name, status,photoPath, ...props }) =>
 {
 
     return (
@@ -19,7 +19,7 @@ const DokterChild = ({ navigation,id, name, status, ...props }) =>
                 navigation.navigate('ChatDetail', { name: name,id:id  });
             }}>
             <View style={{ 'display': 'flex', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
-                <Image source={require('../../assets/ayodokter.png')} style={{
+                <Image source={{uri:"http://10.0.2.2:8000/storage/doctors/profile-image/449353.png"}} style={{
                     width: 50,
                     height: 50,
                     borderRadius: 150 / 2,
@@ -49,7 +49,7 @@ const DokterChatInput = (props) =>
 }
 
 
-const FindDoctorComponent = ({ data,navigation,...props }) =>
+const FindDoctorComponent = ({ data,navigation,endOfDoctorFunc,isLoading,...props }) =>
 {
     return (
         <View style={styles.container} elevation={10} >
@@ -69,10 +69,18 @@ const FindDoctorComponent = ({ data,navigation,...props }) =>
                 />
             </View>
             <FlatList
+                onEndReachedThreshold={0.01}
+                onEndReached={() => endOfDoctorFunc()}
                 data={data}
                 navigation={navigation}
-                renderItem={({ item }) => <DokterChild style={styles.item} key={item.id} id={item.id} name={item.name} status={item.status} navigation={navigation} />}
+                renderItem={({ item }) => <DokterChild style={styles.item} key={item.id}
+                photoPath={item.photo_path} 
+                id={item.id} name={item.name} status={item.status} navigation={navigation} />}
             />
+            <View>
+              <Text style={{ textAlign:'center'}}> {isLoading ? "Loading..." : ""}</Text> 
+            </View>
+
         </View>)
 }
 

@@ -7,10 +7,9 @@ import MenuComponent from '../component/organisms/MenuComponent';
 import FindDoctorComponent from '../component/organisms/FindDoctorComponent';
 import firestore from '@react-native-firebase/firestore';
 import { MMKV } from 'react-native-mmkv';
-import Auth from '../services/auth.service';
 import axios from 'axios';
-
-
+import { GetInfo } from '../services/user.service';
+import { GetDoctorList } from '../services/doctor.service';
 
 const AppScrollViewIOSBounceColorsWrapper = ({
     topBounceColor,
@@ -50,56 +49,72 @@ const AppScrollViewIOSBounceColorsWrapper = ({
 const HomeScreen = ({ navigation }) =>
 {
     const [loadingState, setLoadingState] = useState(false)
+    const [username, setUsernameState] = useState("")
+    const [photo, setPhoto] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
 
-    // const db = firebase.firestore();
-    const query = firestore().collection('doctors');
     const [doctors, setDoctors] = useState([]);
-
-    axios.get('https://jsonplaceholder.typicode.com/posts/1').then(function (response)
-        {
-            console.log(response.data.body);
-        })
-        .catch(function (error)
-        {
-            alert(error.message);
-        })
-        .finally(function ()
-        {
-            // alert('Finally called');
-        });
-        
+    const [counter, setCounter] = useState(10);
+    const [isLoading, setIsLoading] = useState(false);
+    
     useEffect(() =>
     {
-        // Subscribe to query with onSnapshot
-        const unsubscribe = query.onSnapshot(querySnapshot =>
-        {
-            // Get all documents from collection - with IDs
-            const fetchedTasks = [];
 
-            querySnapshot.docs.forEach(childSnapshot =>
-            {
-                // return doc;
-                const key = childSnapshot.id;
-                const data = childSnapshot.data();
-                fetchedTasks.push({ id: key, ...data });
-                setDoctors(fetchedTasks);
-            });
+       GetInfo().then((data) =>
+        {
+            MMKV.set('username', data.data.data.username);
+            setUsernameState(MMKV.getString('username'));
+            MMKV.set('userId', data.data.data.firebase_id);
+            setPhoto(data.data.data.photo_path);
+            MMKV.set('type', data.data.data.member_type);
         });
-        // Detach listener
-        return unsubscribe;
+
+        GetDoctorList().then((data) =>
+        {
+            const dataFetch = data.data.data;
+            // console.log(dataFetch);
+            dataFetch.map((data) =>
+            {
+                setDoctors((prev) => ([...prev, { id: data.firebase_id, name: data.name, status: "online",photo_path:data.photo_path }]));
+            })
+        });
     }, []);
 
-    return (
+    const gettingComplex = () =>
+    {
+        setIsLoading(true)
+        if(loadingState == false){
+            GetDoctorList().then((data) =>
+            {
 
+                const dataFetch = data.data.data;
+                console.log("sekali");
+                let contol = counter;
+                dataFetch.forEach(function (data)
+                {
+                    contol = contol; 
+                    contol++
+                    setDoctors((prev)=>([...prev,{ id: contol, name: data.name, status: "online",photo_path:data.photo_path} ]));
+                    setCounter(contol);
+                })
+                setIsLoading(false)
+            });
+        }
+
+    }
+
+
+    return (
         <LinearGradient style={{
             height: Dimensions.get('window').height,
             width: Dimensions.get('window').width, overflow: 'hidden', flex: 1
         }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}>
             <SafeAreaView style={{ 'flex': 1 }} >
+
                 <AppScrollViewIOSBounceColorsWrapper
                     style={{ flex: 1 }}
                     topBounceColor="#FF826B"
-                    bottomBounceColor="white">
+                    bottomBounceColor="white"
+                >
                     <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}>
                         <View style={{ 'backgroundColor': 'white' }}>
                             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
@@ -114,14 +129,14 @@ const HomeScreen = ({ navigation }) =>
                                 }}>
                                 {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
                                 <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <Avatar.Image size={50} source={require('../assets/ayodokter.png')} />
-                                    <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>Halo Ganteng</Text>
+                                    <Avatar.Image size={50} source={{ uri: photo }} />
+                                    <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
                                 </View>
                             </LinearGradient>
                             <View style={{ zIndex: 2, marginTop: -75, margin: 20 }} >
                                 <MenuComponent navigation={navigation} />
-                                <FindDoctorComponent navigation={navigation}
-                                    nestedScrollEnabled={true} data={doctors}
+                                <FindDoctorComponent navigation={navigation} isLoading={isLoading}
+                                    nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} 
                                 />
                             </View>
                         </View>

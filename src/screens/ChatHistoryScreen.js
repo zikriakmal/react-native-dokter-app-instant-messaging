@@ -6,6 +6,7 @@ import Swipeout from 'react-native-swipeout';
 import { useState } from 'react';
 import { Button } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
+import { MMKV } from 'react-native-mmkv';
 
 
 // Buttons
@@ -39,7 +40,9 @@ const ChatHistoryScreen = ({ navigation }) =>
     // {
 
     const db = firestore();
-    const query = db.collection('users').doc("userId1").collection("chats");
+    const query = db.collection('users').doc(MMKV.getString("userId")).collection("chats");
+
+    let fetchedTasks = [];
 
     useEffect(() =>
     {
@@ -48,14 +51,10 @@ const ChatHistoryScreen = ({ navigation }) =>
         const unsubscribe = query.onSnapshot(querySnapshot =>
         {
             // Get all documents from collection - with IDs
-            const fetchedTasks = [];
 
             querySnapshot.docChanges().forEach((change) =>
             {
-
-
                 if (change.type === 'added') {
-
                     const query2 = db.collection('doctors').doc(change.doc.id);
                     const doc = query2.get().then((hogs) =>
                     {
@@ -63,6 +62,7 @@ const ChatHistoryScreen = ({ navigation }) =>
                         const data = change.doc.data();
                         const preve = { id: key, datadoctor: hogs.data(), data }
                         setChats((prev) => ([...prev, preve]));
+                        fetchedTasks.push(preve)
                     });
                     return () => query2();
                 }
@@ -71,19 +71,23 @@ const ChatHistoryScreen = ({ navigation }) =>
                     const query2 = db.collection('doctors').doc(change.doc.id);
                     const doc = query2.get().then((hogs) =>
                     {
+
                         const key = change.doc.id;
                         const data = change.doc.data();
                         const preve = { id: key, datadoctor: hogs.data(), data }
-                        // setChats((prev) => ([...prev]));
+                        const index = fetchedTasks.findIndex((data) => { return data.id == change.doc.id })
+                        fetchedTasks[index] = preve
+                        setChats(fetchedTasks.map(item=> item.id == change.doc.id ? {...item, preve}: item));
+
                     });
                     return () => query2();
-
                 }
             });
         });
         // Detach listener
         return () => unsubscribe();
     }, []);
+
 
     return (
         <SafeAreaView style={{ 'flex': 1 }} >

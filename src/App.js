@@ -37,6 +37,7 @@ import AppointmentScreen from './screens/AppointmentScreen';
 import AskDoctorScreen from './screens/AskDoctorScreen';
 import DoctorNotesScreen from './screens/DoctorNotesScreen';
 import AppointmentDetailScreen from './screens/AppointmentDetailScreen';
+import { MMKV } from 'react-native-mmkv';
 
 
 
@@ -66,6 +67,7 @@ const App = () =>
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, [])
 
+
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -76,8 +78,6 @@ const App = () =>
   const AuthStack = createStackNavigator();
   const Tab = createMaterialBottomTabNavigator();
   const GuardedStack = createStackNavigator();
-  // console.log(globalState.chatReducers);
-
 
   const AuthStackScreen = () =>
   {
