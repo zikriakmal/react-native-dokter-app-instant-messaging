@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import { View, Text, SafeAreaView, ScrollView, StyleSheet } from 'react-native'
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 import ChatChildComponent from '../component/atoms/ChatChildComponent';
-import Swipeout from 'react-native-swipeout';
 import { useState } from 'react';
-import { Button } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import { MMKV } from 'react-native-mmkv';
 
@@ -17,18 +15,6 @@ let swipeoutBtns = [
     }
 ]
 
-const data = [
-    { id: '1', name: 'Dokter Subandono', lastChat: 'Lagi apa nue' },
-    { id: '2', name: 'Dokter SitiHajar', lastChat: 'Sini Om bantu' },
-    { id: '3', name: 'Dokter Ku Doktermu', lastChat: 'Chaaaakss' },
-    { id: '4', name: 'Dokter Ku Doktermu', lastChat: 'skahhhhhcc' },
-    { id: '5', name: 'Dokter Ku Doktermu', lastChat: 'lol' },
-    { id: '6', name: 'Dokter Ku Doktermu', lastChat: 'penyakit kurik' },
-    { id: '7', name: 'Dokter Nugosyah', lastChat: 'bocor otak mu !!' }
-];
-
-
-
 
 const ChatHistoryScreen = ({ navigation }) =>
 {
@@ -40,7 +26,8 @@ const ChatHistoryScreen = ({ navigation }) =>
     // {
 
     const db = firestore();
-    const query = db.collection('users').doc(MMKV.getString("userId")).collection("chats");
+    const query = db.collection(MMKV.getNumber('type') == 1 ? "users":"doctors").doc(MMKV.getString("userId")).collection("chats");
+    const performHistory = MMKV.getNumber('type') == 2 ? "users" : "doctors";
 
     let fetchedTasks = [];
 
@@ -55,7 +42,7 @@ const ChatHistoryScreen = ({ navigation }) =>
             querySnapshot.docChanges().forEach((change) =>
             {
                 if (change.type === 'added') {
-                    const query2 = db.collection('doctors').doc(change.doc.id);
+                    const query2 = db.collection(performHistory).doc(change.doc.id);
                     const doc = query2.get().then((hogs) =>
                     {
                         const key = change.doc.id;
@@ -68,7 +55,7 @@ const ChatHistoryScreen = ({ navigation }) =>
                 }
                 if (change.type === 'modified') {
 
-                    const query2 = db.collection('doctors').doc(change.doc.id);
+                    const query2 = db.collection(performHistory).doc(change.doc.id);
                     const doc = query2.get().then((hogs) =>
                     {
 

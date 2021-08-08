@@ -36,7 +36,7 @@ const UselessTextInput = (props) =>
     );
 }
 
-const FlatListBasics = ({ navigation, chat }) =>
+const FlatListBasics = ({ navigation, chat,replyName }) =>
 {
     let myList = useRef();
     // useEffect((myList)=>{
@@ -48,15 +48,14 @@ const FlatListBasics = ({ navigation, chat }) =>
                 ref={myList}
                 onContentSizeChange={() => myList?.current?.scrollToEnd({ animated: true })} // scroll end
                 data={chat}
-                renderItem={({ item }) => <ChatChild style={styles.item} key={item.data.id} text={item.data.text} date={item.data.created_at.toDate().toDateString()} type={item.data.type} navigation={navigation} />}
+                renderItem={({ item }) => <ChatChild style={styles.item} replyName ={replyName} key={item.data.id} text={item.data.text} date={item.data.created_at.toDate().toDateString()} type={item.data.type} navigation={navigation} />}
             // onScrollAnimationEnd={false}
             />
         </View>)
 }
 
-const ChatChild = ({ text, date, type, ...props }) =>
+const ChatChild = ({ text, date, type,replyName, ...props }) =>
 {
-    //  const dispatch = useDispatch()
     return (
 
         <TouchableHighlight underlayColor="#DDDDDD" style={{
@@ -85,7 +84,7 @@ const ChatChild = ({ text, date, type, ...props }) =>
                         alignSelf: type == 1 ? 'flex-end' : 'flex-start',
                         color: type == 1 ? 'black' : 'tomato',
                         fontSize: 15, fontWeight: 'bold'
-                    }}>{type == 1 ? 'You' : 'Dokternya'}</Text>
+                    }}>{type == 1 ? 'You' : replyName }</Text>
                     <Text style={{ color: type == 1 ? 'white' : 'black', fontSize: 14, fontWeight: '300' }}>{text}</Text>
                     <Text style={{ color: type == 1 ? 'white' : 'black', alignSelf: type == 1 ? 'flex-end' : 'flex-start', fontSize: 10, fontWeight: '800' }}>{date}</Text>
                 </View>
@@ -102,7 +101,7 @@ const ChatDetailScreen = ({ route, navigation }) =>
     
     const userId = MMKV.getString('userId')
     const db = firestore();
-    const query = db.collection('users').doc(userId).collection("chats").doc(route.params.id).collection("chats").orderBy('created_at', 'asc');
+    const query = db.collection(MMKV.getNumber('type') == 1 ?'users' : 'doctors').doc(userId).collection("chats").doc(route.params.id).collection("chats").orderBy('created_at', 'asc');
 
     useEffect(() =>
     {
@@ -128,7 +127,7 @@ const ChatDetailScreen = ({ route, navigation }) =>
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <View style={{ display: 'flex', 'flexDirection': 'column', height: '100%', backgroundColor: 'white', justifyContent: 'space-between' }}>
-                <FlatListBasics chat={chats} />
+                <FlatListBasics chat={chats} replyName = {route.params.name} />
                 <View style={{ display: 'flex', backgroundColor: 'transparent', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
                     <View
                         style={{
@@ -164,13 +163,20 @@ const ChatDetailScreen = ({ route, navigation }) =>
 
                         onPress={() =>
                         {
-
-
-                            const cityRef2 = db.collection('users').doc(userId).collection("chats").doc(route.params.id).collection("chats");
-                            cityRef2.add({
+                            const type = MMKV.getNumber('type');
+                            const userChat = db.collection('users').doc( type == 1 ? userId : route.params.id).collection("chats").doc(type == 1 ? route.params.id : userId).collection("chats");
+                            userChat.add({
                                 text: inputChat,
                                 created_at: firestore.Timestamp.fromDate(new Date()),
-                                type: 1,
+                                type: type == 1 ? 1 : 2,
+                                last_chat:inputChat
+                            });
+
+                            const doctorChat = db.collection('doctors').doc(type==1 ? route.params.id : userId).collection("chats").doc(type ==1 ? userId : route.params.id).collection("chats");
+                            doctorChat.add({
+                                text: inputChat,
+                                created_at: firestore.Timestamp.fromDate(new Date()),
+                                type: type == 2 ? 1 : 2,
                                 last_chat:inputChat
                             });
 
@@ -178,7 +184,9 @@ const ChatDetailScreen = ({ route, navigation }) =>
                                 last_chat: inputChat,
                             };
                             const cityRef = db.collection('users').doc(userId).collection("chats").doc(route.params.id);
+                            const cityRef2 = db.collection('doctors').doc(route.params.id).collection("chats").doc(userId);
                             const res = cityRef.set(chats);
+                            const res2 = cityRef2.set(chats);
 
                             setInputChatState("");
                         }}>

@@ -10,7 +10,7 @@
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React, { useState, useEffect } from 'react';
-import { useColorScheme, } from 'react-native';
+import { useColorScheme, View, } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, DefaultTheme, useRoute } from '@react-navigation/native';
@@ -94,7 +94,7 @@ const App = () =>
 
     return (
       <GuardedStack.Navigator>
-        <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
+         <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
         <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
@@ -148,7 +148,7 @@ const App = () =>
 
 
       >
-        <Tab.Screen name="HomeScreen" component={HomeScreen}  options={{tabBarLabel: 'Home'}} />
+        {MMKV.getNumber('type') == 1 ? <Tab.Screen name="HomeScreen" component={HomeScreen}  options={{tabBarLabel: 'Home'}} /> : null } 
         <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{ tabBarLabel: 'Chats' }} />
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{ tabBarLabel: 'Profile' }} />
 
