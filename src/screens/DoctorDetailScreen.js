@@ -9,9 +9,9 @@ const DoctorDetailScreen = ({route,navigation}) =>
         <SafeAreaView style={{display:'flex'}}>
             <ScrollView style={{ backgroundColor: '#f2f2f2',height:"85%" }}>
                 <View style={{ backgroundColor: 'white', marginBottom: 10,paddingBottom:15 }}>
-                    <Image source={require('../assets/ayodokter.png')} style={{
+                    <Image source={{uri:route.params.uri}} style={{
                         width: '100%',
-                        height: 150,
+                        height: 200,
                         overflow: "hidden",
                     }} />
 

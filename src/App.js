@@ -95,7 +95,7 @@ const App = () =>
         <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  />
         <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen}  />
 
-        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} />
+        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{title:""}} />
 
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
       </GuardedStack.Navigator>

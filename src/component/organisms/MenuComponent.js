@@ -41,7 +41,6 @@ const MenuComponent = ({ navigation }) =>
         <MenuChild icon='calendar' name="Buat Janji" navigation={navigation} route='AppointmentScreen' />
         <MenuChild icon='comment-edit' name="Tanya Dokter" navigation={navigation} route='AskDoctorScreen' />
         <MenuChild icon='note' name="Catatan Dokter" navigation={navigation} route='DoctorNotesScreen' />
-        <MenuChild icon='note' name="Catatan Dokter" navigation={navigation} route='DoctorDetailScreen' />
 
     </View>
     )
