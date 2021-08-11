@@ -55,6 +55,7 @@ const ProfileScreen = ({ navigation }) =>
                         <HyperChild />
                         <HyperChild />
                         <HyperChild />
+
                     </View>
                 </View>
                 <View   style={{borderRadius: 10, alignContent: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 10, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',elevation:10 }} >

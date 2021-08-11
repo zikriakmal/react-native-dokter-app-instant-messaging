@@ -16,7 +16,8 @@ const DokterChild = ({ navigation,id, name, status,photoPath, ...props }) =>
             underlayColor="#FF826B"
             style={{ borderColor: '#dddddd' }} rippleColor="#FF826B" onPress={() =>
             {
-                navigation.navigate('ChatDetail', { name: name,id:id  });
+                // navigation.navigate('ChatDetail', { name: name,id:id  });
+                navigation.navigate('DoctorDetailScreen', { name: name,id:id  });
             }}>
             <View style={{ 'display': 'flex', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
                 <Image source={{uri:photoPath}} style={{

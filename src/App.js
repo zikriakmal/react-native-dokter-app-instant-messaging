@@ -38,6 +38,7 @@ import AskDoctorScreen from './screens/AskDoctorScreen';
 import DoctorNotesScreen from './screens/DoctorNotesScreen';
 import AppointmentDetailScreen from './screens/AppointmentDetailScreen';
 import { MMKV } from 'react-native-mmkv';
+import DoctorDetailScreen from './screens/DoctorDetailScreen';
 
 
 
@@ -84,20 +85,17 @@ const App = () =>
 
     return (
       <GuardedStack.Navigator>
-         <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
+        <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
         <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
         <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen}  />
         <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
-
-
-
         <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  />
         <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen}  />
 
-
+        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} />
 
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
       </GuardedStack.Navigator>
