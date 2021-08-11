@@ -140,8 +140,6 @@ const HomeScreen = ({ navigation }) =>
                                 />
                             </View>
                         </View>
-                        {/* <WhiteBackgroundBody /> */}
-                        <YellowBackgroundFooter />
                     </ScrollView>
                 </AppScrollViewIOSBounceColorsWrapper>
 

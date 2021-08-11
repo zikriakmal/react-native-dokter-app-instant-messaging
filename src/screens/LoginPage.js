@@ -20,24 +20,26 @@ const LoginPage = ({ navigation }) =>
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch()
     const globalState = useSelector(state => state)
 
     const storeData = () =>
     {
+        setIsLoading(true);
         Auth(email, password).then((data) =>
         {
-
             if (data.data.status == "success") {
                 MMKV.set('isLogin', true)
                 MMKV.set('access_token',data.data.data.access_token)
-                MMKV.set('userId','userId1')
                 MMKV.set('type',data.data.data.member_type)
                 MMKV.set('userId',data.data.data.firebase_id)
+                setIsLoading(false)
                 dispatch({type:'SET_LOGIN',token:data.data.data.access_token})
                 return 0;
             }
+            setIsLoading(false)
             alert("login gagal");
         });
 
@@ -64,8 +66,8 @@ const LoginPage = ({ navigation }) =>
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
-                            <Button dark={true} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
-                                Masuk
+                            <Button dark={true} disabled={isLoading} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
+                                {isLoading ? "Loading..." : "Masuk"}
                             </Button>
                             <Text onPress={() => { navigation.navigate('Register') }} style={{ 'marginVertical': 10, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
                                 Daftar Disini
