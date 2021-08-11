@@ -7,7 +7,7 @@ const DoctorDetailScreen = ({route,navigation}) =>
 {
     return (
         <SafeAreaView style={{display:'flex'}}>
-            <ScrollView style={{ backgroundColor: '#f2f2f2',height:"85%" }}>
+            <ScrollView style={{ backgroundColor: '#f2f2f2',height:"90%" }}>
                 <View style={{ backgroundColor: 'white', marginBottom: 10,paddingBottom:15 }}>
                     <Image source={{uri:route.params.uri}} style={{
                         width: '100%',
@@ -32,7 +32,7 @@ const DoctorDetailScreen = ({route,navigation}) =>
                     <Text style={{fontSize:20,fontWeight:'300',padding:10}} >RS USU</Text>
                 </View>
             </ScrollView>
-            <View style={{padding:20}}>
+            <View style={{padding:15,paddingBottom:10}}>
                 <GlobalButton title="Chat Sekarang" onPress={()=> navigation.navigate('ChatDetail', { name: route.params.name ,id:route.params.id  })}/>
             </View>
         </SafeAreaView>
