@@ -85,21 +85,21 @@ const HomeScreen = ({ navigation }) =>
         if(loadingState == false){
             GetDoctorList().then((data) =>
             {
-
                 const dataFetch = data.data.data;
-                console.log("sekali");
                 let contol = counter;
                 dataFetch.forEach(function (data)
                 {
                     contol = contol; 
                     contol++
-                    setDoctors((prev)=>([...prev,{ id: contol, name: data.name, status: "online",photo_path:data.photo_path} ]));
+                    setDoctors((prev)=>([...prev,
+                        { id: data.firebase_id, name: data.name, 
+                            status: "online",
+                            photo_path:data.photo_path} ]));
                     setCounter(contol);
                 })
                 setIsLoading(false)
             });
         }
-
     }
 
 
@@ -141,7 +141,7 @@ const HomeScreen = ({ navigation }) =>
                             </View>
                         </View>
                         {/* <WhiteBackgroundBody /> */}
-                        {/* <YellowBackgroundFooter /> */}
+                        <YellowBackgroundFooter />
                     </ScrollView>
                 </AppScrollViewIOSBounceColorsWrapper>
 

@@ -22,9 +22,7 @@ const ChatHistoryScreen = ({ navigation }) =>
     const [chats, setChats] = useState([]);
     const [username, setUsername] = useState("");
 
-    // useEffect(() =>
-    // {
-
+    console.log(MMKV.getString("type"));
     const db = firestore();
     const query = db.collection(MMKV.getNumber('type') == 1 ? "users":"doctors").doc(MMKV.getString("userId")).collection("chats");
     const performHistory = MMKV.getNumber('type') == 2 ? "users" : "doctors";

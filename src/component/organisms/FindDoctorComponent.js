@@ -19,7 +19,7 @@ const DokterChild = ({ navigation,id, name, status,photoPath, ...props }) =>
                 navigation.navigate('ChatDetail', { name: name,id:id  });
             }}>
             <View style={{ 'display': 'flex', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
-                <Image source={{uri:"http://10.0.2.2:8000/storage/doctors/profile-image/449353.png"}} style={{
+                <Image source={{uri:photoPath}} style={{
                     width: 50,
                     height: 50,
                     borderRadius: 150 / 2,
@@ -70,7 +70,7 @@ const FindDoctorComponent = ({ data,navigation,endOfDoctorFunc,isLoading,...prop
             </View>
             <FlatList
                 onEndReachedThreshold={0.01}
-                onEndReached={() => endOfDoctorFunc()}
+                onEndReached={(distanceFromEnd) => {if (distanceFromEnd < 0) return;}}
                 data={data}
                 navigation={navigation}
                 renderItem={({ item }) => <DokterChild style={styles.item} key={item.id}

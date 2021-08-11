@@ -33,7 +33,8 @@ const LoginPage = ({ navigation }) =>
                 MMKV.set('isLogin', true)
                 MMKV.set('access_token',data.data.data.access_token)
                 MMKV.set('userId','userId1')
-                MMKV.set('type',1)
+                MMKV.set('type',data.data.data.member_type)
+                MMKV.set('userId',data.data.data.firebase_id)
                 dispatch({type:'SET_LOGIN',token:data.data.data.access_token})
                 return 0;
             }

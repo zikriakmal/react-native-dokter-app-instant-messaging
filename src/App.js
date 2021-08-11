@@ -41,16 +41,6 @@ import { MMKV } from 'react-native-mmkv';
 
 
 
-const tes = () =>
-{
-  firebase.database().ref('users/' + "5515").set({
-    username: "dokter",
-    email: "dokterzikriakmale@gmail.com",
-    profile_picture: "k22o222222n1t",
-    type: 1,
-  });
-}
-
 const MyTheme = {
   ...DefaultTheme,
   colors: {
