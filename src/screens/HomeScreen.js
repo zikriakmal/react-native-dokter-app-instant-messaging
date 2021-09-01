@@ -10,6 +10,7 @@ import { MMKV } from 'react-native-mmkv';
 import axios from 'axios';
 import { GetInfo } from '../services/user.service';
 import { GetDoctorList } from '../services/doctor.service';
+import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
 
 const AppScrollViewIOSBounceColorsWrapper = ({
     topBounceColor,
@@ -54,47 +55,52 @@ const HomeScreen = ({ navigation }) =>
 
     const [doctors, setDoctors] = useState([]);
     const [counter, setCounter] = useState(10);
+    const [isFetched, setIsFetched] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    
+
     useEffect(() =>
     {
-
-       GetInfo().then((data) =>
+        GetInfo().then((data) =>
         {
             MMKV.set('username', data.data.data.username);
             setUsernameState(MMKV.getString('username'));
             MMKV.set('userId', data.data.data.firebase_id);
+            MMKV.set('photoProfile', data.data.data.photo_path);
             setPhoto(data.data.data.photo_path);
             MMKV.set('type', data.data.data.member_type);
+            setIsFetched(true);
         });
 
-        GetDoctorList().then((data) =>
-        {
-            const dataFetch = data.data.data;
-            // console.log(dataFetch);
-            dataFetch.map((data) =>
+        if (doctors.length <= 0) {
+            GetDoctorList().then((data) =>
             {
-                setDoctors((prev) => ([...prev, { id: data.firebase_id, name: data.name, status: "online",photo_path:data.photo_path }]));
-            })
-        });
+               const dataFetch = data.data.data;
+                dataFetch.map((data) =>
+                {
+                    setDoctors((prev) => ([...prev, { id: data.firebase_id, name: data.name, status: "Specialist Anak", photo_path: data.photo_path }]));
+                })
+            });
+        }
     }, []);
 
     const gettingComplex = () =>
     {
         setIsLoading(true)
-        if(loadingState == false){
+        if (loadingState == false) {
             GetDoctorList().then((data) =>
             {
                 const dataFetch = data.data.data;
                 let contol = counter;
                 dataFetch.forEach(function (data)
                 {
-                    contol = contol; 
+                    contol = contol;
                     contol++
-                    setDoctors((prev)=>([...prev,
-                        { id: data.firebase_id, name: data.name, 
-                            status: "online",
-                            photo_path:data.photo_path} ]));
+                    setDoctors((prev) => ([...prev,
+                    {
+                        id: data.firebase_id, name: data.name,
+                        status: "online",
+                        photo_path: data.photo_path
+                    }]));
                     setCounter(contol);
                 })
                 setIsLoading(false)
@@ -106,43 +112,57 @@ const HomeScreen = ({ navigation }) =>
     return (
         <LinearGradient style={{
             height: Dimensions.get('window').height,
-            width: Dimensions.get('window').width, overflow: 'hidden', flex: 1
-        }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}>
-            <SafeAreaView style={{ 'flex': 1 }} >
-
-                <AppScrollViewIOSBounceColorsWrapper
-                    style={{ flex: 1 }}
+            width: Dimensions.get('window').width, overflow: 'hidden'
+        }}
+            start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+            colors={['tomato', '#FF826B', '#ffb1a3']}>
+            <SafeAreaView >
+                {/* <AppScrollViewIOSBounceColorsWrapper */}
+                {/* style={{ flex: 1 }}
                     topBounceColor="#FF826B"
-                    bottomBounceColor="white"
-                >
-                    <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}>
-                        <View style={{ 'backgroundColor': 'white' }}>
-                            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
-                                style={{
-                                    backgroundColor: 'white',
-                                    height: 160,
-                                    borderBottomLeftRadius: 50,
-                                    borderBottomRightRadius: 50,
-                                    borderBottomStartRadius: 50,
-                                    borderBottomEndRadius: 50,
-                                    padding: 20,
-                                }}>
-                                {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
-                                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                    <Avatar.Image size={50} source={{ uri: photo }} />
-                                    <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
-                                </View>
-                            </LinearGradient>
-                            <View style={{ zIndex: 2, marginTop: -75, margin: 20 }} >
-                                <MenuComponent navigation={navigation} />
-                                <FindDoctorComponent navigation={navigation} isLoading={isLoading}
-                                    nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} 
-                                />
+                    bottomBounceColor="white"> */}
+                {/* <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}> */}
+                <View style={{ 'backgroundColor': 'white' }}>
+                    <View>
+                        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
+                            style={{
+                                backgroundColor: 'white',
+                                height: 160,
+                                borderBottomLeftRadius: 50,
+                                borderBottomRightRadius: 50,
+                                borderBottomStartRadius: 50,
+                                borderBottomEndRadius: 50,
+                                padding: 20,
+                            }}>
+                            {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
+                            { isFetched ?
+                            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                 <Avatar.Image size={50} source={{ uri: photo }} />
+                                 <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
                             </View>
-                        </View>
-                    </ScrollView>
-                </AppScrollViewIOSBounceColorsWrapper>
+                            : 
+                            <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                  <ShimmerPlaceholder LinearGradient={LinearGradient} style={{ height:50,width:50,borderRadius:100 }} />
+                                  <ShimmerPlaceholder LinearGradient={LinearGradient} style={{ 
+                                      fontSize: 18, 
+                                    fontWeight: '300',
+                                    marginVertical:15,
+                                    marginHorizontal:15,
+                                    borderRadius:10 }} />
+                            </View>
 
+                            }
+                        </LinearGradient>
+                    </View>
+                    <View style={{ zIndex: 4, marginTop: -75, margin: 20, display: 'flex' }} >
+                        <MenuComponent navigation={navigation} />
+                        <FindDoctorComponent navigation={navigation} isLoading={isLoading}
+                            nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} />
+                        <View style={{ 'backgroundColor': 'white', 'height': '100%' }}></View>
+                    </View>
+                </View>
+                {/* </ScrollView> */}
+                {/* </AppScrollViewIOSBounceColorsWrapper> */}
             </SafeAreaView>
         </LinearGradient >
     )

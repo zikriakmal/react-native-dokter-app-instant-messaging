@@ -92,8 +92,8 @@ const App = () =>
         <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen}  />
         <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
-        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  />
-        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen}  />
+        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  options={({route})=>({title:'Tanya Dokter'})} />
+        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen} options={({route})=>({title:'Catatan Dokter'})}   />
 
         <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{title:""}} />
 
@@ -132,10 +132,7 @@ const App = () =>
             // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-        })}
-
-
-      >
+        })}>
         {MMKV.getNumber('type') == 1 ? <Tab.Screen name="HomeScreen" component={HomeScreen}  options={{tabBarLabel: 'Home'}} /> : null } 
         <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{ tabBarLabel: 'Chats' }} />
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{ tabBarLabel: 'Profile' }} />
@@ -144,11 +141,6 @@ const App = () =>
 
     )
   }
-
-
-
-
-
 
   return (
     <NavigationContainer theme={MyTheme}>

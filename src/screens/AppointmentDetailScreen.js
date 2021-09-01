@@ -13,8 +13,8 @@ const HeaderContent = () =>
                 <Avatar.Image style={{ alignItems: 'center' }} source={require('../assets/ayodokter.png')} />
             </View>
             <View style={{ 'backgroundColor': 'white', flex: 3 }}>
-                <Text>Dr. Leonita Katarina Sihotang, Sp.KFR</Text>
-                <Text>Dokter Rehabilitasi Medis</Text>
+                <Text style={{fontSize:18,fontWeight:'bold'}}>Dr. Leonita Katarina Sihotang, Sp.KFR</Text>
+                <Text style={{fontSize:16}}>Dokter Rehabilitasi Medis</Text>
                 <Text>12 Pasieen</Text>
             </View>
         </View>
@@ -37,10 +37,7 @@ const BodyContent = ({navigation}) =>
                         <Avatar.Image style={{ alignItems: 'center' }} source={require('../assets/ayodokter.png')} />
                     </View>
                     <View style={{ padding: 10 }}>
-                        <Text>Rumah Sakit Advent Medan</Text>
-                        <Text>Rumah Sakit Advent Medan</Text>
-                        <Text>Rumah Sakit Advent Medan</Text>
-                        <Text>Rumah Sakit Advent Medan</Text>
+                        <Text>Rumah Sakit USU</Text>
                     </View>
                 </View>
                 <View style={{ marginVertical: 10, padding: 3, borderWidth: 0.4, borderRadius: 5, borderColor: 'grey' }}>
@@ -58,9 +55,7 @@ const BodyContent = ({navigation}) =>
             }}>
                 <Text style={{ paddingVertical: 10 }}>Profil Dokter</Text>
                 <Text style={{ paddingVertical: 10 }}>
-                    Lorem ipsumsssssssssssssssssssss
-                    sssssssssssssssssssssss
-                    sssssssssssssssssssssssssssssssssss
+                   saya sudah berpengalaman selama kurang lebih 3 tahun 
                 </Text>
             </View>
             <GlobalButton title={'Buat Janji'} onPress={()=>{navigation.navigate('ChatDetail', { name: name,id:id  });}}  />
@@ -74,7 +69,6 @@ const AppointmentDetailScreen = ({ route, navigation }) =>
         <View>
             <HeaderContent />
             <BodyContent navigation={navigation} />
-            {/* <Text>{route.params.name}</Text> */}
         </View>
     )
 }

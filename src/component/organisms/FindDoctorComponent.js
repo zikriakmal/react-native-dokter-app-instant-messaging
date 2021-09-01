@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import { FlatList, RectButton, TextInput } from 'react-native-gesture-handler';
 
 
@@ -61,12 +61,12 @@ const FindDoctorComponent = ({ data,navigation,endOfDoctorFunc,isLoading,...prop
                 style={{
                     borderRadius: 15,
                     backgroundColor: 'white',
-                    margin: 10, marginHorizontal: 20, shadowRadius: 3, shadowOpacity: 0.2, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
+                    margin: 2, marginHorizontal: 20, shadowRadius: 3, shadowOpacity: 0.2, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
 
                 }}>
                 <DokterChatInput
-                    style={{ paddingHorizontal: 15, paddingVertical: 10 }}
-                    onChangeText={(text) => console.log(text)}
+                    style={{ paddingHorizontal: 15, paddingVertical: 7 }}
+                    onChangeText={(text) => {}}
                 />
             </View>
             <FlatList
@@ -90,9 +90,8 @@ const FindDoctorComponent = ({ data,navigation,endOfDoctorFunc,isLoading,...prop
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         borderColor: '#dddddd',
-        height: 500,
+        height:Dimensions.get('window').height - (Dimensions.get('window').height*0.53),
         borderWidth: 0.5,
         borderRadius: 10,
         shadowRadius: 3, shadowOpacity: 0.2,

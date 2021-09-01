@@ -7,11 +7,8 @@ import
 import { ScrollView } from 'react-native-gesture-handler'
 import { Button, TextInput } from 'react-native-paper'
 import { MMKV } from 'react-native-mmkv';
-import { useDispatch, useSelector } from 'react-redux'
-import Auth from '../services/auth.service'
-
-
-
+import { useDispatch } from 'react-redux'
+import {Auth} from '../services/auth.service'
 
 
 const LoginPage = ({ navigation }) =>
@@ -23,7 +20,6 @@ const LoginPage = ({ navigation }) =>
     const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch()
-    const globalState = useSelector(state => state)
 
     const storeData = () =>
     {
@@ -50,11 +46,11 @@ const LoginPage = ({ navigation }) =>
         <SafeAreaView style={{ 'backgroundColor': 'white', 'height': '100%' }} >
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={styles.container}>
+                style={{height:'100%'}}>
                 <ScrollView >
                     <View>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '700', 'margin': 30 }}>Aplikasi Dokter Nugosyah</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '700', 'margin': 30 }}>Ayo Dokter</Text>
                             <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '700', 'margin': 5 }}>Masuk</Text>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
                         </View>
@@ -75,7 +71,6 @@ const LoginPage = ({ navigation }) =>
                         </View>
                     </View>
                 </ScrollView>
-
             </KeyboardAvoidingView>
         </SafeAreaView>
     )

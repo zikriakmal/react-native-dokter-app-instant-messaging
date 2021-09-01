@@ -13,34 +13,29 @@ const HyperChild = () =>
             <Ionicons name='calendar' color='#292929' style={{ fontSize: 18 }}></Ionicons>
             <Text style={{ fontSize: 14, marginTop: 5, fontWeight: '400', 'color': '#292929' }} > 23 Tahun</Text>
         </View>
-
     )
 }
 
 const ProfileScreen = ({ navigation }) =>
 {
-
-    const global = useSelector(state => state.reducers)
     const dispatch = useDispatch()
-
     const storeData = (value) =>
     {
         MMKV.set('isLogin', false)
         MMKV.set('username',"")
         MMKV.set('access_token',"")
-        console.log(MMKV.getString('username'))
         dispatch({ type: 'SET_LOGIN' })
     }
 
     return (
         <SafeAreaView style={{ backgroundColor: 'white' }}>
-            <ScrollView >
+            <ScrollView>
                 <View style={{ elevation:10,borderRadius: 10, alignContent: 'center', alignItems: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }} >
                     <View style={{ 'alignSelf': 'flex-end' }} >
                         <Ionicons name='pencil' onPress={() => { alert('woi bujang enam') }} style={{ fontSize: 20, fontWeight: '900' }} />
                     </View>
-                    <Text style={{ fontSize: 18, fontWeight: '700', 'marginBottom': 20, 'color': 'tomato' }} > Angela Fongs </Text>
-                    <Image source={require('../assets/ayodokter.png')} style={{
+                    <Text style={{ fontSize: 18, fontWeight: '700', 'marginBottom': 20, 'color': 'tomato' }} > {MMKV.getString('username')} </Text>
+                    <Image source={{uri:MMKV.getString('photoProfile')}} style={{
                         width: 150,
                         height: 150,
                         borderRadius: 150 / 2,
@@ -53,9 +48,8 @@ const ProfileScreen = ({ navigation }) =>
                     </View>
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
                         <HyperChild />
-                        <HyperChild />
-                        <HyperChild />
-
+                        {/* <HyperChild /> */}
+                        {/* <HyperChild /> */}
                     </View>
                 </View>
                 <View   style={{borderRadius: 10, alignContent: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 10, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',elevation:10 }} >

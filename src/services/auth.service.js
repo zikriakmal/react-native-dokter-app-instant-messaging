@@ -10,5 +10,17 @@ const Auth = async (email,password) =>
     return userData;
 }
 
+const Register = async (username,phoneNumber,email,password) =>
+{
+    let userData = await indexService.post('auth/register',
+        {
+            username:username,
+            phoneNumber:phoneNumber,
+            email: email,
+            password:password 
+        }).catch((error)=>console.log(error))
+    return userData;
+}
 
-export default Auth;
+
+export {Auth,Register};

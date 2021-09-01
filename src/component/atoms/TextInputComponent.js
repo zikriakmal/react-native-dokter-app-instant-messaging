@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     inputContainer: {
         borderRadius: 15,
         backgroundColor: 'white',
-        margin: 10, 
+        margin: 5, 
         marginHorizontal: 20, 
         shadowRadius: 3, 
         shadowOpacity: 0.2, 
         shadowOffset: { width: 2, height: -1 }, 
         shadowColor: 'black',
-        paddingVertical:10,
+        paddingVertical:0,
         paddingHorizontal:25
     }
 })

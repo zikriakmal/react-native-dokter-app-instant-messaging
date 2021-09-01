@@ -29,7 +29,7 @@ const UselessTextInput = (props) =>
         <TextInput
             {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
             editable
-            style={{ maxHeight: 80 }}
+            style={{ maxHeight: 40,height:40 }}
             placeholder="ketik disini!"
 
         />
