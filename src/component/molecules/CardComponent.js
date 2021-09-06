@@ -5,7 +5,7 @@ import { Avatar } from 'react-native-paper'
 const CardComponent = () =>
 {
     return (
-        <View elevation={10} style={{ marginTop:10, marginHorizontal:10, padding: 15, backgroundColor:'white',borderRadius: 20, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }}>
+        <View elevation={10} style={{ marginVertical:5, marginHorizontal:10, padding: 15, backgroundColor:'white',borderRadius: 20, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }}>
             <View style={{ display: 'flex', flexDirection: 'row',marginVertical:10 }}>
                 <View>
                     <Avatar.Image source={{url:'https://backoffice.dokterapp.zikri.my.id/storage/doctors/profile-image/358655.jpeg'}}  />

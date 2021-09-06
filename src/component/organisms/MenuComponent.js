@@ -36,7 +36,7 @@ const MenuComponent = ({ navigation }) =>
         display: 'flex',
         flexDirection: 'row',
         elevation: 15,
-        borderRadius: 10, backgroundColor: 'white', marginVertical: 15, paddingHorizontal: 20, paddingVertical: 20, shadowRadius: 3, shadowOpacity: 0.2,
+        borderRadius: 10, backgroundColor: 'white', marginVertical: 10, paddingHorizontal: 20, paddingVertical: 20, shadowRadius: 3, shadowOpacity: 0.2,
         shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',}}>
 
         <MenuChild icon='calendar' name="Buat Janji" navigation={navigation} route='AppointmentScreen' />
