@@ -27,6 +27,7 @@ const BodyContent = ({navigation}) =>
     return (
         <View style={{margin:30}}>
             <View style={{
+                elevation:5,
                  padding: 10, shadowColor: '#000000',
                 backgroundColor: 'white', 'shadowOffset': { 'height': 2 },
                 'shadowRadius': 9, 'shadowOpacity': 0.3, 'borderRadius': 10
@@ -42,14 +43,14 @@ const BodyContent = ({navigation}) =>
                 </View>
                 <View style={{ marginVertical: 10, padding: 3, borderWidth: 0.4, borderRadius: 5, borderColor: 'grey' }}>
                     <Text style={{ padding: 3 }}> Rabu, 28 Juli 2021</Text>
-                    <Button mode="outlined" onPress={() => alert('hai')} style={{ width: '50%', margin: 3 }} > 18:00 - 21:00</Button>
+                    <Button mode="outlined" onPress={() => alert('Feature ini belum selesai, mohon bersabar')} style={{ width: '50%', margin: 3 }} > 18:00 - 21:00</Button>
                 </View>
                 <View style={{ marginVertical: 10, padding: 3, borderWidth: 0.4, borderRadius: 5, borderColor: 'grey' }}>
                     <Text style={{ padding: 3 }}> Senin, 25 Juli 2021</Text>
-                    <Button mode="outlined" onPress={() => alert('hai')} style={{ width: '50%', margin: 3 }} > 18:00 - 21:00</Button>
+                    <Button mode="outlined" onPress={() => alert('Feature ini belum selesai, mohon bersabar')} style={{ width: '50%', margin: 3 }} > 18:00 - 21:00</Button>
                 </View>
             </View>
-            <View style={{ marginVertical: 25, padding: 10, shadowColor: '#000000',
+            <View style={{elevation:5, marginVertical: 25, padding: 10, shadowColor: '#000000',
                 backgroundColor: 'white', 'shadowOffset': { 'height': 2 },
                 'shadowRadius': 9, 'shadowOpacity': 0.3, 'borderRadius': 10
             }}>
@@ -58,7 +59,7 @@ const BodyContent = ({navigation}) =>
                    saya sudah berpengalaman selama kurang lebih 3 tahun 
                 </Text>
             </View>
-            <GlobalButton title={'Buat Janji'} onPress={()=>{navigation.navigate('ChatDetail', { name: name,id:id  });}}  />
+            <GlobalButton title={'Buat Janji'} onPress={()=>{alert('Feature ini belum selesai, mohon bersabar')}}  />
         </View>
     )
 }
@@ -83,6 +84,7 @@ const style = StyleSheet.create({
         paddingVertical: 20,
         borderBottomWidth: 0.5,
         borderBottomColor: 'grey',
+        
     }
 
 })

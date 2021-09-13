@@ -34,7 +34,7 @@ const DoctorNotesQuesioner = ({navigation}) =>
                     </View>
                 )}
                 <View style={{marginVertical:10}}>
-                    <GlobalButton disabled={isLoading}  title="kirim"  onPress={() => { 
+                    <GlobalButton disabled={isLoading}   title="kirim"  onPress={() => { 
                         setIsLoading(true);
                         postQuestion(questionData).then((data) => setIsLoading(false)) 
                         Alert.alert('Info','Quesioner mu berhasil dikirim')

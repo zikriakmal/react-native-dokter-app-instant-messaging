@@ -5,7 +5,7 @@ const TextInputComponent = (props) =>
 {
     return (
         <View
-            elevation={20}
+            elevation={5}
             style={styles.inputContainer}>
             <TextInput
                 {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below

@@ -32,22 +32,24 @@ const AskDoctorScreen = () =>
     return (
         <SafeAreaView>
             <View style={{ padding: 10, display: 'flex', height: '100%' }}>
-                <View style={{ margin: 5 }}>
-                    <Text style={{ fontSize: 20 }}>Kirim pertanyaanmu</Text>
+                <View style={{ margin: 10 }}>
+                    <Text style={{ fontSize: 15 }}>Kamu bisa tanyakan pertanyaan seputar MESH</Text>
                 </View>
                 <View>
                     <TextInput
                         multiline
                         mode="outlined"
+                        value={question}
                         numberOfLines={3}
                         style={{ margin: 10 }}
                         onChangeText={(data) => setQuestion(data)}
                     ></TextInput>
                 </View>
                 <View style={{ margin: 2, marginHorizontal: 10 }}>
-                    <GlobalButton title={isLoading ? "Loading..." : "Kirim Pertanyaan"} onPress={() =>
+                    <GlobalButton disabled={question == ""} title={isLoading ? "Loading..." : "Kirim Pertanyaan"} onPress={() =>
                     {
                         setIsLoading(true);
+                        
                         postAskQuestion(question, 1).then((data) =>
                         {
                             getSelfQuestion().then((data) =>
@@ -55,6 +57,7 @@ const AskDoctorScreen = () =>
                                 setSelfQuestionData(data.data.data);
                             })
                             setIsLoading(false)
+                            setQuestion('');
                         }
                         );
 

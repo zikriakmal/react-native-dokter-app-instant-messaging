@@ -3,7 +3,6 @@ import { View, Text, SafeAreaView, FlatList, TouchableHighlight, RefreshControl 
 import GlobalButton from '../component/atoms/GlobalButton'
 import { getPostedQuestionNotes } from '../services/doctorNotes.service'
 import dateFormat from 'dateformat';
-import { MMKV } from 'react-native-mmkv';
 
 const DoctorNotesScreen = ({ navigation }) =>
 {
@@ -25,7 +24,7 @@ const DoctorNotesScreen = ({ navigation }) =>
 
     return (
         <SafeAreaView>
-            <View style={{ padding: 20 }}><GlobalButton title="mulai" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} /></View>
+            <View style={{ padding: 20 }}><GlobalButton title="Jawab pertanyaan" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} /></View>
             <FlatList
                 style={{ marginHorizontal: 10, height: "85%" }}
                 onEndReachedThreshold={0.01}
@@ -42,10 +41,10 @@ const DoctorNotesScreen = ({ navigation }) =>
                     })
                 }}
                 renderItem={({ item }) =>
-                    <TouchableHighlight underlayColor="#DDDDDD" onPress={() => alert('you click me dude')}>
-                        <View style={{ padding: 20, margin: 10, borderWidth: 1, borderRadius: 10, borderColor: 'black' }}>
+                    <TouchableHighlight underlayColor="#DDDDDD"  onPress={() => alert('Future Feature, Coming soon')}>
+                        <View style={{ padding: 20, margin: 10,elevation:5, borderRadius: 20 ,backgroundColor:'white'}}>
                             <Text style={{ marginVertical: 5, color: 'orange' }}>Pengajuan catatan pada:</Text>
-                            <Text>{dateFormat(item.created_at, "dd/mm/yyyy, Hh:mm:ss")}</Text>
+                            <Text>{dateFormat(item.created_at, "dd/mm/yyyy, H:MM")}</Text>
                             <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row-reverse' }}>
                                 <Text style={{ borderRadius: 20, backgroundColor: (item.is_answered ? 'green' : 'tomato'), color: 'white', width: 80, fontSize: 10, padding: 3, paddingHorizontal: 10, textAlign: 'center' }}>
                                     {item.is_answered ? 'Sudah Direspon' : 'Belum Direspon'}</Text>

@@ -5,17 +5,18 @@ import { useDispatch } from 'react-redux'
 import Modal from "react-native-modal";
 import { MMKV } from 'react-native-mmkv';
 import GlobalButton from '../atoms/GlobalButton';
+import dateFormat from 'dateformat';
 const CardComponent = ({ photoPath, data }) =>
 {
     const [modalVisible, setModalVisible] = useState(false);
     return (
-        <View elevation={10} style={{ marginVertical: 5, marginHorizontal: 10, padding: 15, backgroundColor: 'white', borderRadius: 20, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }}>
+        <View elevation={5} style={{ marginVertical: 5, marginHorizontal: 10, padding: 15, backgroundColor: 'white', borderRadius: 20, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }}>
             <Modal isVisible={modalVisible} animationIn={'slideInUp'}
                 animationOutTiming={10}
                 style={{ padding: 20 }}
                 onBackdropPress={() => { setModalVisible(false) }} >
 
-                <View style={{ alignSelf: 'flex-end', 'maxWidth': '25%', marginVertical: 10 }}>
+                <View style={{ alignSelf: 'flex-end', 'maxWidth': '25%', marginVertical: 5 }}>
                     <GlobalButton onPress={() => { setModalVisible(false) }} title={'X'} />
                 </View>
                 <ScrollView style={{ maxHeight: '50%' }}>
@@ -39,8 +40,8 @@ const CardComponent = ({ photoPath, data }) =>
                     <Avatar.Image source={{ uri: photoPath }} />
                 </View>
                 <View style={{ padding: 10 }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Dr.Fong</Text>
-                    <Text style={{ fontSize: 12 }}>Dibuat pada 27 januari 2021 </Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Anda</Text>
+                    <Text style={{ fontSize: 12 }}>Ditanyakan pada { dateFormat(data.updated_at, "dd/mm/yyyy, H:MM")} </Text>
                 </View>
             </View>
             <Text style={{ fontSize: 17 }} numberOfLines={4}>{data.question}.</Text>
@@ -52,7 +53,7 @@ const CardComponent = ({ photoPath, data }) =>
                 }}>
                     {data.is_answered ? 'Telah Dijawab' : 'Belum Dijawab'}
                 </Text>
-                <Text onPress={(data) => { setModalVisible(true) }} style={{ fontSize: 12, textAlign: 'right', marginTop: 15, paddingVertical: 10 }}>Baca Lebih Detail</Text>
+                <Text onPress={(data) => { setModalVisible(true) }} style={{ fontSize: 12,textDecorationLine:'underline', textAlign: 'right', marginTop: 15, paddingVertical: 10 }}>Lihat Detail</Text>
             </View>
         </View>
     )
