@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, Alert } from 'react-native'
 import { TextInput } from 'react-native-paper';
 import GlobalButton from '../component/atoms/GlobalButton';
 import { getQuestion, postQuestion } from '../services/doctorNotes.service';
 
-const DoctorNotesQuesioner = () =>
+const DoctorNotesQuesioner = ({navigation}) =>
 {
     const [questionData, setQuestionData] = useState([]);
     const [isFetched, setIsFetched] = useState(false);
@@ -37,6 +37,8 @@ const DoctorNotesQuesioner = () =>
                     <GlobalButton disabled={isLoading}  title="kirim"  onPress={() => { 
                         setIsLoading(true);
                         postQuestion(questionData).then((data) => setIsLoading(false)) 
+                        Alert.alert('Info','Quesioner mu berhasil dikirim')
+                        navigation.navigate("DoctorNotesScreen")
                         }} />
                 </View>
             </View>

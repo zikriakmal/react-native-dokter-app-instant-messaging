@@ -27,7 +27,7 @@ const DoctorNotesScreen = ({ navigation }) =>
         <SafeAreaView>
             <View style={{ padding: 20 }}><GlobalButton title="mulai" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} /></View>
             <FlatList
-                style={{ marginHorizontal: 10, height: "80%" }}
+                style={{ marginHorizontal: 10, height: "85%" }}
                 onEndReachedThreshold={0.01}
                 nestedScrollEnabled={true}
                 data={postedData}

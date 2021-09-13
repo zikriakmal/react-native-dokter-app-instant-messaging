@@ -5,10 +5,12 @@ import GlobalButton from '../component/atoms/GlobalButton'
 
 const DoctorDetailScreen = ({route,navigation}) =>
 {
+    const data= route.params.data;
+
     return (
         <SafeAreaView >
             <ScrollView style={{ backgroundColor: '#f2f2f2',height:"89%" }}>
-                <View style={{ backgroundColor: 'white', marginBottom: 10,paddingBottom:15 }}>
+                <View style={{ backgroundColor: 'white', marginBottom: 10,paddingBottom:15,elevation:5 }}>
                     <Image source={{uri:route.params.uri}} style={{
                         width: '100%',
                         height: 200,
@@ -16,20 +18,19 @@ const DoctorDetailScreen = ({route,navigation}) =>
                     }} />
 
                     <Text style={styles.header_text} >{route.params.name}</Text>
-                    <Text style={{fontSize:20,textAlign:'center'}} >Specialist kanduangan</Text>
+                    <Text style={{fontSize:20,textAlign:'center'}} ></Text>
                 </View>
-                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15 }}>
+                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15,elevation:3 }}>
                     <Text style={{fontSize:20,fontWeight:'bold',padding:10,paddingBottom:5}} >Nomor STR</Text>
-                    <Text style={{fontSize:20,fontWeight:'300',padding:10}} >711111122223</Text>
+                    <Text style={{fontSize:18,fontWeight:'300',padding:10}} >{data.str}</Text>
                 </View>
-                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15 }}>
+                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15,elevation:3 }}>
                     <Text style={{fontSize:20,fontWeight:'bold',padding:10,paddingBottom:5}} >Pendidikan Terakhir</Text>
-                    <Text style={{fontSize:20,fontWeight:'300',padding:10}} >Universitas Sumatera Utara</Text>
-                    <Text style={{fontSize:20,fontWeight:'300',padding:10}} >2020</Text>
+                    <Text style={{fontSize:18,fontWeight:'300',padding:10}} >{data.education}</Text>
                 </View>
-                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15 }}>
+                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15,elevation:3 }}>
                     <Text style={{fontSize:20,fontWeight:'bold',padding:10,paddingBottom:5}} >Tempat Praktik</Text>
-                    <Text style={{fontSize:20,fontWeight:'300',padding:10}} >RS USU</Text>
+                    <Text style={{fontSize:18,fontWeight:'300',padding:10}} >{data.hospital}</Text>
                 </View>
             </ScrollView>
             <View style={{padding:15,paddingBottom:10, }}>

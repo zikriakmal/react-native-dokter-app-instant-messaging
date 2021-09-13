@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import
 {
-    StyleSheet, View, Text, SafeAreaView, Image,KeyboardAvoidingView
+    StyleSheet, View, Text, SafeAreaView, Image, KeyboardAvoidingView
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { TextInput } from 'react-native-paper'
@@ -54,17 +54,18 @@ const RegisterScreen = ({ navigation }) =>
                 <ScrollView >
                     <View>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '700', 'margin': 30 }}>Ayo Dokter</Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '700', 'margin': 5 }}>Registrasi</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5, marginTop: 30 }}>MESH-Teen </Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '', 'margin': 1 }}>Registrasi</Text>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setUsername(data)} mode="outlined" label="Nama Lengkap" style={{ 'margin': 15, marginVertical: 10, 'height': 45 }} />
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setPhoneNumber(data)} mode="outlined" label="Nomor Telfon" style={{ 'margin': 15, marginVertical: 10, 'height': 45 }} />
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setEmail(data)} mode="outlined" label="Email" style={{ 'margin': 15, marginVertical: 10, 'height': 45 }} />
+                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'margin': 10, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'margin': 10, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'margin': 10, marginHorizontal: 20 }} />
                             <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'margin': 15, 'height': 45 }} right={<TextInput.Icon
+                                secureTextEntry={passwordHide} style={{ 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>

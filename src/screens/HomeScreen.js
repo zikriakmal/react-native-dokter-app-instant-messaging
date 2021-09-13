@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableHighlight, Image, FlatList, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, TouchableHighlight, Image, FlatList, TouchableOpacity, ActivityIndicator, Dimensions, RefreshControl } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Avatar } from 'react-native-paper';
 
@@ -7,7 +7,6 @@ import MenuComponent from '../component/organisms/MenuComponent';
 import FindDoctorComponent from '../component/organisms/FindDoctorComponent';
 import firestore from '@react-native-firebase/firestore';
 import { MMKV } from 'react-native-mmkv';
-import axios from 'axios';
 import { GetInfo } from '../services/user.service';
 import { GetDoctorList } from '../services/doctor.service';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
@@ -56,29 +55,39 @@ const HomeScreen = ({ navigation }) =>
     const [doctors, setDoctors] = useState([]);
     const [counter, setCounter] = useState(10);
     const [isFetched, setIsFetched] = useState(false);
+    const [isFetchedDoctor, setIsFetchedDoctor] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     useEffect(() =>
     {
-        GetInfo().then((data) =>
-        {
-            MMKV.set('username', data.data.data.username);
-            setUsernameState(MMKV.getString('username'));
-            MMKV.set('userId', data.data.data.firebase_id);
-            MMKV.set('photoProfile', data.data.data.photo_path);
-            setPhoto(data.data.data.photo_path);
-            MMKV.set('type', data.data.data.member_type);
-            setIsFetched(true);
-        });
-
         if (doctors.length <= 0) {
             GetDoctorList().then((data) =>
             {
-               const dataFetch = data.data.data;
+                const dataFetch = data.data.data;
                 dataFetch.map((data) =>
                 {
-                    setDoctors((prev) => ([...prev, { id: data.firebase_id, name: data.name, status: "Specialist Anak", photo_path: data.photo_path }]));
+                    setDoctors((prev) => ([...prev, {
+                        id: data.firebase_id,
+                        name: data.name,
+                        status: data.specialist,
+                        hospital: data.hospital,
+                        education: data.education,
+                        str: data.str,
+                        photo_path: data.photo_path
+                    }]));
                 })
+                setIsFetchedDoctor(true)
+            });
+            GetInfo().then((data) =>
+            {
+                MMKV.set('username', data.data.data.username);
+                setUsernameState(MMKV.getString('username'));
+                MMKV.set('userId', data.data.data.firebase_id);
+                MMKV.set('photoProfile', data.data.data.photo_path);
+                setPhoto(data.data.data.photo_path);
+                MMKV.set('type', data.data.data.member_type);
+                setIsFetched(true);
             });
         }
     }, []);
@@ -108,7 +117,7 @@ const HomeScreen = ({ navigation }) =>
         }
     }
 
-
+    const fullHeight = Dimensions.get('window').height;
     return (
         <LinearGradient style={{
             height: Dimensions.get('window').height,
@@ -117,50 +126,97 @@ const HomeScreen = ({ navigation }) =>
             start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
             colors={['tomato', '#FF826B', '#ffb1a3']}>
             <SafeAreaView >
-                {/* <AppScrollViewIOSBounceColorsWrapper */}
-                {/* style={{ flex: 1 }}
+                {/* <AppScrollViewIOSBounceColorsWrapper 
                     topBounceColor="#FF826B"
-                    bottomBounceColor="white"> */}
-                {/* <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}> */}
-                <View style={{ 'backgroundColor': 'white' }}>
-                    <View>
-                        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
-                            style={{
-                                backgroundColor: 'white',
-                                height: 160,
-                                borderBottomLeftRadius: 50,
-                                borderBottomRightRadius: 50,
-                                borderBottomStartRadius: 50,
-                                borderBottomEndRadius: 50,
-                                padding: 20,
-                            }}>
-                            {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
-                            { isFetched ?
-                            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                 <Avatar.Image size={50} source={{ uri: photo }} />
-                                 <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
-                            </View>
-                            : 
-                            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                  <ShimmerPlaceholder LinearGradient={LinearGradient} style={{ height:50,width:50,borderRadius:100 }} />
-                                  <ShimmerPlaceholder LinearGradient={LinearGradient} style={{ 
-                                      fontSize: 18, 
-                                    fontWeight: '300',
-                                    marginVertical:15,
-                                    marginHorizontal:15,
-                                    borderRadius:10 }} />
-                            </View>
+                    bottomBounceColor="white"> 
+                //  <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}> */}
+                <ScrollView
+                    style={{ flex: 1 }}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={isRefreshing}
+                            onRefresh={() =>
+                            {
+                                // setIsRefreshing(true);
+                                setIsFetched(false);
+                                setIsFetchedDoctor(false);
+                                setDoctors([])
+                                GetDoctorList().then((data) =>
+                                {
+                                    const dataFetch = data.data.data;
+                                    dataFetch.map((data) =>
+                                    {
+                                        setDoctors((prev) => ([...prev, {
+                                            id: data.firebase_id,
+                                            name: data.name,
+                                            status: data.specialist,
+                                            hospital: data.hospital,
+                                            education: data.education,
+                                            str: data.str,
+                                            photo_path: data.photo_path
+                                        }]));
+                                    })
+                                    setIsFetchedDoctor(true)
+                                });
+                                GetInfo().then((data) =>
+                                {
+                                    MMKV.set('username', data.data.data.username);
+                                    setUsernameState(MMKV.getString('username'));
+                                    MMKV.set('userId', data.data.data.firebase_id);
+                                    MMKV.set('photoProfile', data.data.data.photo_path);
+                                    setPhoto(data.data.data.photo_path);
+                                    MMKV.set('type', data.data.data.member_type);
+                                    setIsFetched(true);
+                                });
 
                             }
-                        </LinearGradient>
+                            }
+                        />
+                    }
+                    style={{ 'backgroundColor': 'white' }}>
+                    <View style={{ height: fullHeight }}>
+
+                        <View >
+                            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
+                                style={{
+                                    backgroundColor: 'white',
+                                    height: 160,
+                                    borderBottomLeftRadius: 50,
+                                    borderBottomRightRadius: 50,
+                                    borderBottomStartRadius: 50,
+                                    borderBottomEndRadius: 50,
+                                    padding: 20,
+                                }}>
+                                {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
+                                {isFetched ?
+                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <Avatar.Image size={50} source={{ uri: photo }} />
+                                        <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
+                                    </View>
+                                    :
+                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <ShimmerPlaceholder LinearGradient={LinearGradient} style={{ height: 50, width: 50, borderRadius: 100 }} />
+                                        <ShimmerPlaceholder LinearGradient={LinearGradient} style={{
+                                            fontSize: 18,
+                                            fontWeight: '300',
+                                            marginVertical: 15,
+                                            marginHorizontal: 15,
+                                            borderRadius: 10
+                                        }} />
+                                    </View>
+
+                                }
+                            </LinearGradient>
+                        </View>
+                        <View style={{ zIndex: 4, marginTop: -70, margin: 20, display: 'flex' }} >
+                            <MenuComponent navigation={navigation} />
+                            <FindDoctorComponent navigation={navigation} isLoading={isLoading}
+                                nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} isFetched={isFetchedDoctor} />
+                            <View style={{ 'backgroundColor': 'white', 'height': '100%' }}></View>
+                        </View>
+
                     </View>
-                    <View style={{ zIndex: 4, marginTop: -75, margin: 20, display: 'flex' }} >
-                        <MenuComponent navigation={navigation} />
-                        <FindDoctorComponent navigation={navigation} isLoading={isLoading}
-                            nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} />
-                        <View style={{ 'backgroundColor': 'white', 'height': '100%' }}></View>
-                    </View>
-                </View>
+                </ScrollView>
                 {/* </ScrollView> */}
                 {/* </AppScrollViewIOSBounceColorsWrapper> */}
             </SafeAreaView>

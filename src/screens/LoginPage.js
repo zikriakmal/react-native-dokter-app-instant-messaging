@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import
 {
-    StyleSheet, View, Text, SafeAreaView, Image, KeyboardAvoidingView
+    StyleSheet, View, Text, SafeAreaView, Image, KeyboardAvoidingView, Alert
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Button, TextInput } from 'react-native-paper'
@@ -36,7 +36,7 @@ const LoginPage = ({ navigation }) =>
                 return 0;
             }
             setIsLoading(false)
-            alert("login gagal");
+            Alert.alert('Login',"Email Atau Password Salah");
         });
 
     }
@@ -50,22 +50,23 @@ const LoginPage = ({ navigation }) =>
                 <ScrollView >
                     <View>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '700', 'margin': 30 }}>Ayo Dokter</Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '700', 'margin': 5 }}>Masuk</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5,marginTop:30 }}>MESH-Teen </Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '', 'margin': 1 }}>Menstruation Hygiene for Teen</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '', 'margin': 6 }}>Masuk</Text>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'margin': 15, 'height': 45 }} onChangeText={(data) => { setEmail(data) }} />
+                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'margin': 15 }} onChangeText={(data) => { setEmail(data) }} />
                             <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'margin': 15, 'height': 45 }} right={<TextInput.Icon
+                                secureTextEntry={passwordHide} style={{ 'margin': 15 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
                             <Button dark={true} disabled={isLoading} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
                                 {isLoading ? "Loading..." : "Masuk"}
                             </Button>
-                            <Text onPress={() => { navigation.navigate('Register') }} style={{ 'marginVertical': 10, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
+                            <Text onPress={() => { navigation.navigate('Register') }} style={{ 'marginVertical': 10,paddingVertical:20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
                                 Daftar Disini
                             </Text>
                         </View>
