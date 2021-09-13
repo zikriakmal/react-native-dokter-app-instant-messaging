@@ -15,7 +15,6 @@ const DoctorNotesQuesioner = () =>
         if (!isFetched) {
             getQuestion().then((data) =>
             {
-                console.log(data.data.data);
                 setQuestionData(data.data.data);
                 setIsFetched(true);
             })
@@ -26,7 +25,7 @@ const DoctorNotesQuesioner = () =>
         <SafeAreaView>
             <View style={{marginHorizontal:10}}>
                 {questionData.map((dt, index) =>
-                    <View style={{marginVertical:10}}>
+                    <View style={{marginVertical:10}} key={index}>
                         <Text style={{fontWeight:"800",fontSize:16}}>{dt.question}</Text>
                         <TextInput mode="outlined" key={dt.id} onChangeText={(data) =>
                         {

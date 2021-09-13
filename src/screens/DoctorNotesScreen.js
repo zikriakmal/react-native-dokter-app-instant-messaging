@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, FlatList, TouchableHighlight, RefreshControl 
 import GlobalButton from '../component/atoms/GlobalButton'
 import { getPostedQuestionNotes } from '../services/doctorNotes.service'
 import dateFormat from 'dateformat';
+import { MMKV } from 'react-native-mmkv';
 
 const DoctorNotesScreen = ({ navigation }) =>
 {
@@ -37,7 +38,6 @@ const DoctorNotesScreen = ({ navigation }) =>
                     getPostedQuestionNotes().then((data) =>
                     {
                         setPostedData(data.data.data)
-                        console.log(data.data.data)
                         setIsLoading(false)
                     })
                 }}

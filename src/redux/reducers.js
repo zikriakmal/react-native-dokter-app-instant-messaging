@@ -10,6 +10,10 @@ const initialStateChat = {
     title:'dokteralisubandono'
 }
 
+const initialStateModal = {
+    modalVisible : true
+}
+
 const initialStateUser = {
     userType:1,
     username:MMKV.getString('username'),
@@ -37,10 +41,18 @@ const userReducers = (state = initialStateUser,action)=>{
     return state;
 }
 
+const modalReducers = (state = initialStateModal,action)=>{
+    if(action.type == "SET_MODAL_VISIBLE"){
+        return {...state,modalVisible:!state.modalVisible} 
+    }
+    return state
+}
+
 
 
 export default combineReducers({
     reducers,
     chatReducers,
-    userReducers 
+    userReducers,
+    modalReducers
   })

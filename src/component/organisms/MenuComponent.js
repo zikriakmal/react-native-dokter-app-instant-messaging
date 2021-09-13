@@ -16,6 +16,7 @@ const MenuChild = ({ name, icon, navigation, route }) =>
                 <View>
                     <Avatar.Icon elevation={5} size={50} color={'white'} icon={icon} style={
                         {
+                            
                             alignSelf: 'center',
                             shadowRadius: 4, shadowOpacity: 0.4,
                             shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
