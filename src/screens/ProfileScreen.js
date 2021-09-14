@@ -34,7 +34,7 @@ const ProfileScreen = ({ navigation }) =>
                     <View style={{ 'alignSelf': 'flex-end' }} >
                         <Ionicons name='pencil' onPress={() => { navigation.navigate('EditProfileScreen')}} style={{ fontSize: 20, fontWeight: '900' }} />
                     </View>
-                    <Text style={{ fontSize: 18, fontWeight: '700', 'marginBottom': 20, 'color': 'tomato' }} > {MMKV.getString('username')} </Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', 'marginBottom': 20, 'color': 'tomato' }} > {MMKV.getString('username')} </Text>
                     <Image source={{uri:MMKV.getString('photoProfile')}} style={{
                         width: 150,
                         height: 150,

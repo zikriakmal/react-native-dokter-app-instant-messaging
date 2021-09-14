@@ -71,8 +71,8 @@ const FindDoctorComponent = ({ data, navigation, endOfDoctorFunc, isLoading, isF
 {
     return (
         <View style={styles.container} elevation={10} >
-            <Text style={{ alignSelf: 'center', 'marginTop': 5, 'marginBottom': 5, fontSize: 20, fontWeight: '700', color: 'tomato' }}> Silahkan Pilih Dokter</Text>
-            <Text style={{ alignSelf: 'center', 'marginBottom': 5, fontSize: 14, color: '#3d3d3d' }}>Chat bersama dokter</Text>
+            <Text style={{ alignSelf: 'center', 'marginTop': 15, 'marginBottom': 5, fontSize: 20, fontWeight: 'bold', color: 'tomato' }}>Chat langsung dengan dokter</Text>
+            <Text style={{ alignSelf: 'center', 'marginBottom': 5, fontSize: 14, color: '#3d3d3d',fontWeight:'800' }}>Chat bersama dokter</Text>
             <View
                 elevation={20}
                 style={{

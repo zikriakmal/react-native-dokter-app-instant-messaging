@@ -30,7 +30,7 @@ const DoctorNotesScreen = ({ navigation }) =>
 
     return (
         <SafeAreaView>
-            <View style={{ padding: 20 }}><GlobalButton title="Jawab pertanyaan" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} /></View>
+            <View style={{ padding: 20 }}><GlobalButton title="Request Catatan" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} /></View>
             <FlatList
                 style={{ marginHorizontal: 10, height: "85%" }}
                 onEndReachedThreshold={0.01}
