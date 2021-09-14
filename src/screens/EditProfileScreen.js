@@ -5,6 +5,8 @@ import { Button, TextInput } from 'react-native-paper'
 import GlobalButton from '../component/atoms/GlobalButton'
 import * as ImagePicker from "react-native-image-picker"
 import { updateProfileInfo } from '../services/user.service'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const EditProfileScreen = () =>
 {
@@ -15,8 +17,9 @@ const EditProfileScreen = () =>
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    const dispatch = useDispatch()
 
-
+    const selector = useSelector(state=>state)
 
     const [filePath, setFilePath] = useState(MMKV.getString('photoProfile'));
     const myfun = () =>
@@ -55,7 +58,7 @@ const EditProfileScreen = () =>
                                 alignSelf: 'center'
                             }} />
                         <View>
-                            <View style={{ paddingHorizontal: 80, marginTop: 10 }}>
+                            <View style={{ paddingHorizontal: 120, marginTop: 10 }}>
                                 <GlobalButton onPress={() =>
                                     ImagePicker.launchImageLibrary(
                                         {
@@ -66,7 +69,7 @@ const EditProfileScreen = () =>
                                         },
                                         (response) =>
                                         {
-                                            setFilePath(response.assets[0].uri);
+                                            if(!response.didCancel) setFilePath(response.assets[0].uri);
                                         },
                                     )
                                 } title="Ubah Foto" />
@@ -82,11 +85,16 @@ const EditProfileScreen = () =>
                             <GlobalButton onPress={() =>
                             {
                                 setIsLoading(true)
-                                updateProfileInfo({filePath:filePath,username:username,phoneNumber:phoneNumber,password:password}).then((resp) =>
+                                updateProfileInfo({ filePath: filePath, username: username, phoneNumber: phoneNumber, password: password }).then((resp) =>
                                 {
                                     MMKV.set('username', resp.data.data.username);
                                     MMKV.set('photoProfile', resp.data.data.photo_path);
-                                    MMKV.set('phoneNumber',resp.data.data.phone_number)
+                                    MMKV.set('phoneNumber', resp.data.data.phone_number)
+
+                                    dispatch({
+                                        type: 'SET_USER',
+                                        username: resp.data.data.username,
+                                    })
                                     setIsLoading(false)
                                 })
                             }} title={isLoading ? 'Mohon menunggu...' : 'Ubah'} disabled={isLoading} style={{ 'margin': 10 }} />

@@ -91,7 +91,7 @@ const App = () =>
         <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
-        <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen}  />
+        <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen} options={{title:'Buat Janji'}}  />
         <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
         <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  options={({route})=>({title:'Tanya Dokter'})} />

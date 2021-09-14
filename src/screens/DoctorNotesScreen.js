@@ -4,6 +4,12 @@ import GlobalButton from '../component/atoms/GlobalButton'
 import { getPostedQuestionNotes } from '../services/doctorNotes.service'
 import dateFormat from 'dateformat';
 
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
+
+const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
+
+
 const DoctorNotesScreen = ({ navigation }) =>
 {
 
@@ -41,16 +47,26 @@ const DoctorNotesScreen = ({ navigation }) =>
                     })
                 }}
                 renderItem={({ item }) =>
-                    <TouchableHighlight underlayColor="#DDDDDD"  onPress={() => alert('Future Feature, Coming soon')}>
+                    // <TouchableHighlight underlayColor="#DDDDDD"  onPress={() => alert('Future Feature, Coming soon')}>
+                    //     <View style={{ padding: 20, margin: 10,elevation:5, borderRadius: 20 ,backgroundColor:'white'}}>
+                    //         <Text style={{ marginVertical: 5, color: 'orange' }}>Pengajuan catatan pada:</Text>
+                    //         <Text>{dateFormat(item.created_at, "dd/mm/yyyy, H:MM")}</Text>
+                    //         <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row-reverse' }}>
+                    //             <Text style={{ borderRadius: 20, backgroundColor: (item.is_answered ? 'green' : 'tomato'), color: 'white', width: 80, fontSize: 10, padding: 3, paddingHorizontal: 10, textAlign: 'center' }}>
+                    //                 {item.is_answered ? 'Sudah Direspon' : 'Belum Direspon'}</Text>
+                    //         </View>
+                    //     </View>
+                    // </TouchableHighlight>
+
+                    <View underlayColor="#DDDDDD" >
                         <View style={{ padding: 20, margin: 10,elevation:5, borderRadius: 20 ,backgroundColor:'white'}}>
-                            <Text style={{ marginVertical: 5, color: 'orange' }}>Pengajuan catatan pada:</Text>
-                            <Text>{dateFormat(item.created_at, "dd/mm/yyyy, H:MM")}</Text>
-                            <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row-reverse' }}>
-                                <Text style={{ borderRadius: 20, backgroundColor: (item.is_answered ? 'green' : 'tomato'), color: 'white', width: 80, fontSize: 10, padding: 3, paddingHorizontal: 10, textAlign: 'center' }}>
-                                    {item.is_answered ? 'Sudah Direspon' : 'Belum Direspon'}</Text>
+                            <ShimmerPlaceHolder style={{ marginVertical: 5, color: 'orange',borderRadius:30 }}/>
+                            <ShimmerPlaceHolder style={{width:"25%",borderRadius:30}}/>
+                            <View style={{ marginTop: 10 ,display: 'flex', flexDirection: 'row-reverse' }}>
+                                <ShimmerPlaceHolder style={{ width:100,borderRadius: 20}}/>
                             </View>
                         </View>
-                    </TouchableHighlight>
+                    </View>
                 }
             />
             <FlatList />

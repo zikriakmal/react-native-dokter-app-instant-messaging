@@ -44,10 +44,14 @@ const ProfileScreen = ({ navigation }) =>
                         borderColor: "tomato"
                     }} />
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
-                        <Text style={{ fontSize: 18, fontWeight: '700', 'marginTop': 20, 'color': '#171717' }} >{MMKV.getString('phoneNumber')}</Text>
+                        <Text style={{ fontSize: 18, fontWeight: '700', 'marginTop': 20, 'color': '#171717' }} >{MMKV.getString('email')}</Text>
                     </View>
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
-                        <HyperChild />
+                        <Text style={{ fontSize: 16, fontWeight: '100', 'marginTop':5, 'color': '#171717' }} >{MMKV.getString('phoneNumber')}</Text>
+                    </View>
+ 
+                    <View style={{ display: 'flex', 'flexDirection': 'row' }}>
+                        {/* <HyperChild /> */}
                         {/* <HyperChild /> */}
                         {/* <HyperChild /> */}
                     </View>

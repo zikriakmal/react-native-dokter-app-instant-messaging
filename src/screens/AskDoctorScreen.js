@@ -18,6 +18,11 @@ const AskDoctorScreen = () =>
     const [isFetched, setIsFetched] = useState(false);
     const [selfQuestionData, setSelfQuestionData] = useState([]);
 
+    const dummyData = [
+        { key: 1, photoPath: null, data: null, isFetched: false },
+        { key: 2, photoPath: null, data: null, isFetched: false }
+    ]
+
     useEffect(() =>
     {
         if (!isFetched) {
@@ -49,7 +54,7 @@ const AskDoctorScreen = () =>
                     <GlobalButton disabled={question == ""} title={isLoading ? "Loading..." : "Kirim Pertanyaan"} onPress={() =>
                     {
                         setIsLoading(true);
-                        
+
                         postAskQuestion(question, 1).then((data) =>
                         {
                             getSelfQuestion().then((data) =>
@@ -76,9 +81,9 @@ const AskDoctorScreen = () =>
                             setIsLoadingList(false)
                         })
                     }}
-                    data={selfQuestionData}
+                    data={!isFetched ? dummyData : selfQuestionData}
                     nestedScrollEnabled={true}
-                    renderItem={({ item }) => <CardComponent photoPath={MMKV.getString('photoProfile')} data={item} />}
+                    renderItem={({ item }) => <CardComponent photoPath={MMKV.getString('photoProfile')} isFetched={isFetched} data={item} />}
                 />
             </View>
         </SafeAreaView>

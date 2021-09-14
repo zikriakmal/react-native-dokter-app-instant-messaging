@@ -9,37 +9,8 @@ import { MMKV } from 'react-native-mmkv';
 import { GetInfo } from '../services/user.service';
 import { GetDoctorList } from '../services/doctor.service';
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
-
-const AppScrollViewIOSBounceColorsWrapper = ({
-    topBounceColor,
-    bottomBounceColor,
-    children,
-    ...props
-}) =>
-{
-    return (
-        <View {...props} style={[{ position: 'relative' }, props.style]}>
-            {children}
-            <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: -1, // appear under the scrollview
-                }}>
-                {/* <View
-                    style={{ flex: 1, backgroundColor: topBounceColor }}
-                /> */}
-                <LinearGradient style={{ flex: 1 }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']} />
-                <View
-                    style={{ flex: 1, backgroundColor: bottomBounceColor }}
-                />
-            </View>
-        </View>
-    );
-};
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 const HomeScreen = ({ navigation }) =>
@@ -54,6 +25,9 @@ const HomeScreen = ({ navigation }) =>
     const [isFetchedDoctor, setIsFetchedDoctor] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isRefreshing, setIsRefreshing] = useState(false);
+
+
+    const selector = useSelector(state => state);
 
     useEffect(() =>
     {
@@ -77,10 +51,12 @@ const HomeScreen = ({ navigation }) =>
             });
             GetInfo().then((data) =>
             {
-                MMKV.set('username', data.data.data.username);
+
                 MMKV.set('userId', data.data.data.firebase_id);
+                MMKV.set('username', data.data.data.username);
+                MMKV.set('email', data.data.data.email);
                 MMKV.set('photoProfile', data.data.data.photo_path);
-                MMKV.set('phoneNumber',data.data.data.phone_number)
+                MMKV.set('phoneNumber', data.data.data.phone_number)
                 MMKV.set('type', data.data.data.member_type);
                 setUsernameState(MMKV.getString('username'));
                 setPhoto(data.data.data.photo_path);
@@ -157,12 +133,14 @@ const HomeScreen = ({ navigation }) =>
                                 });
                                 GetInfo().then((data) =>
                                 {
-                                    MMKV.set('username', data.data.data.username);
-                                    setUsernameState(MMKV.getString('username'));
                                     MMKV.set('userId', data.data.data.firebase_id);
+                                    MMKV.set('username', data.data.data.username);
+                                    MMKV.set('email', data.data.data.email);
                                     MMKV.set('photoProfile', data.data.data.photo_path);
-                                    setPhoto(data.data.data.photo_path);
+                                    MMKV.set('phoneNumber', data.data.data.phone_number)
                                     MMKV.set('type', data.data.data.member_type);
+                                    setUsernameState(MMKV.getString('username'));
+                                    setPhoto(data.data.data.photo_path);
                                     setIsFetched(true);
                                 });
 
@@ -220,5 +198,39 @@ const HomeScreen = ({ navigation }) =>
         </LinearGradient >
     )
 }
+
+
+const AppScrollViewIOSBounceColorsWrapper = ({
+    topBounceColor,
+    bottomBounceColor,
+    children,
+    ...props
+}) =>
+{
+    return (
+        <View {...props} style={[{ position: 'relative' }, props.style]}>
+            {children}
+            <View style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: -1, // appear under the scrollview
+            }}>
+                {/* <View
+                    style={{ flex: 1, backgroundColor: topBounceColor }}
+                /> */}
+                <LinearGradient style={{ flex: 1 }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']} />
+                <View
+                    style={{ flex: 1, backgroundColor: bottomBounceColor }}
+                />
+            </View>
+        </View>
+    );
+};
+
+
+
 
 export default HomeScreen

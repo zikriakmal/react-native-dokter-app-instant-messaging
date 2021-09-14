@@ -29,11 +29,11 @@ export default function Main()
 {
   return (
 
-    <Provider store={store} >
-      <PaperProvider theme={theme}>
+    <PaperProvider theme={theme}>
+      <Provider store={store} >
         <App />
-      </PaperProvider >
-    </Provider >
+      </Provider >
+    </PaperProvider >
   );
 }
 

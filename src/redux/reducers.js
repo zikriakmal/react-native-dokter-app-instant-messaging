@@ -15,9 +15,7 @@ const initialStateModal = {
 }
 
 const initialStateUser = {
-    userType:1,
-    username:MMKV.getString('username'),
-    photoPath:MMKV.getString('photo_path')
+    username:"",
 }
 
 const reducers =(state=initialState,action)=>{
@@ -36,7 +34,7 @@ const chatReducers = (state=initialStateChat,action)=>{
 
 const userReducers = (state = initialStateUser,action)=>{
     if(action.type == "SET_USER"){
-        return {...state,username:action.name}
+        return {...state,username:action.username}
     }
     return state;
 }
@@ -47,7 +45,6 @@ const modalReducers = (state = initialStateModal,action)=>{
     }
     return state
 }
-
 
 
 export default combineReducers({
