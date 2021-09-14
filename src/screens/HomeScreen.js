@@ -5,7 +5,6 @@ import { Avatar } from 'react-native-paper';
 
 import MenuComponent from '../component/organisms/MenuComponent';
 import FindDoctorComponent from '../component/organisms/FindDoctorComponent';
-import firestore from '@react-native-firebase/firestore';
 import { MMKV } from 'react-native-mmkv';
 import { GetInfo } from '../services/user.service';
 import { GetDoctorList } from '../services/doctor.service';
@@ -21,21 +20,18 @@ const AppScrollViewIOSBounceColorsWrapper = ({
     return (
         <View {...props} style={[{ position: 'relative' }, props.style]}>
             {children}
-            <View
-                style={{
+            <View style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
                     zIndex: -1, // appear under the scrollview
-                }}
-            >
+                }}>
                 {/* <View
                     style={{ flex: 1, backgroundColor: topBounceColor }}
                 /> */}
                 <LinearGradient style={{ flex: 1 }} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']} />
-
                 <View
                     style={{ flex: 1, backgroundColor: bottomBounceColor }}
                 />
@@ -82,11 +78,12 @@ const HomeScreen = ({ navigation }) =>
             GetInfo().then((data) =>
             {
                 MMKV.set('username', data.data.data.username);
-                setUsernameState(MMKV.getString('username'));
                 MMKV.set('userId', data.data.data.firebase_id);
                 MMKV.set('photoProfile', data.data.data.photo_path);
-                setPhoto(data.data.data.photo_path);
+                MMKV.set('phoneNumber',data.data.data.phone_number)
                 MMKV.set('type', data.data.data.member_type);
+                setUsernameState(MMKV.getString('username'));
+                setPhoto(data.data.data.photo_path);
                 setIsFetched(true);
             });
         }

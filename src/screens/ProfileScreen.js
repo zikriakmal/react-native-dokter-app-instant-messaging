@@ -6,7 +6,7 @@ import { Button } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux'
 
-const HyperChild = () =>
+const HyperChild = ({navigation}) =>
 {
     return (
         <View style={{ display: 'flex', 'flexDirection': 'column', 'marginTop': 20, 'paddingHorizontal': 10, alignItems: 'center' }}>
@@ -32,7 +32,7 @@ const ProfileScreen = ({ navigation }) =>
             <ScrollView>
                 <View style={{ elevation:10,borderRadius: 10, alignContent: 'center', alignItems: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }} >
                     <View style={{ 'alignSelf': 'flex-end' }} >
-                        <Ionicons name='pencil' onPress={() => { alert('woi bujang enam') }} style={{ fontSize: 20, fontWeight: '900' }} />
+                        <Ionicons name='pencil' onPress={() => { navigation.navigate('EditProfileScreen')}} style={{ fontSize: 20, fontWeight: '900' }} />
                     </View>
                     <Text style={{ fontSize: 18, fontWeight: '700', 'marginBottom': 20, 'color': 'tomato' }} > {MMKV.getString('username')} </Text>
                     <Image source={{uri:MMKV.getString('photoProfile')}} style={{
@@ -44,7 +44,7 @@ const ProfileScreen = ({ navigation }) =>
                         borderColor: "tomato"
                     }} />
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
-                        <Text style={{ fontSize: 18, fontWeight: '700', 'marginTop': 20, 'color': '#171717' }} >+62 853 6350 278</Text>
+                        <Text style={{ fontSize: 18, fontWeight: '700', 'marginTop': 20, 'color': '#171717' }} >{MMKV.getString('phoneNumber')}</Text>
                     </View>
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
                         <HyperChild />
@@ -52,12 +52,11 @@ const ProfileScreen = ({ navigation }) =>
                         {/* <HyperChild /> */}
                     </View>
                 </View>
-                <View   style={{borderRadius: 10, alignContent: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 10, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',elevation:10 }} >
+                {/* <View   style={{borderRadius: 10, alignContent: 'center', 'margin': 10, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 10, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',elevation:10 }} >
                     <Text style={{ textAlign: 'center', fontSize: 22, fontWeight: '700' }}> Data Diri</Text>
                     <Text style={{ fontSize: 14, 'marginTop': 20 }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam luctus tincidunt erat non blandit. Nullam nec ipsum id erat imperdiet placerat. Integer pellentesque sit amet nibh id egestas. Fusce quis sollicitudin massa. Praesent a quam in velit posuere commodo. Morbi mattis nisi placerat felis suscipit congue. Donec fringilla dolor a tellus auctor, eu maximus eros tempor.
                     </Text>
-
-                </View>
+                </View> */}
                 <Button dark={true} theme={{roundness:20}} contentStyle={{height:45}} style={{  'margin': 10, 'marginLeft': 15, 'marginRight': 15, 'marginBottom': 20, 'marginTop': 10 }} mode="contained" onPress={storeData}>
                     Keluar
                 </Button>

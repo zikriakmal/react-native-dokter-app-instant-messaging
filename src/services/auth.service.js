@@ -15,7 +15,7 @@ const Register = async (username,phoneNumber,email,password) =>
     let userData = await indexService.post('auth/register',
         {
             username:username,
-            phoneNumber:phoneNumber,
+            phone_number:phoneNumber,
             email: email,
             password:password 
         }).catch((error)=>console.log(error))

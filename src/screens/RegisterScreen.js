@@ -55,8 +55,8 @@ const RegisterScreen = ({ navigation }) =>
                     <View>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
                             <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5, marginTop: 30 }}>MESH-Teen </Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '', 'margin': 1 }}>Registrasi</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '100', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '100', 'margin': 1 }}>Registrasi</Text>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
                         </View>
                         <View>

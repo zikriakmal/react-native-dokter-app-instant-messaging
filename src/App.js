@@ -40,6 +40,7 @@ import AppointmentDetailScreen from './screens/AppointmentDetailScreen';
 import { MMKV } from 'react-native-mmkv';
 import DoctorDetailScreen from './screens/DoctorDetailScreen';
 import DoctorNotesQuesioner from './screens/DoctorNotesQuesioner';
+import EditProfileScreen from './screens/EditProfileScreen';
 
 
 
@@ -98,10 +99,9 @@ const App = () =>
 
         <GuardedStack.Screen name="DoctorNotesQuesionerScreen" component={DoctorNotesQuesioner} options={({route})=>({title:'Quesioner'})}   />
 
-
-
         <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{title:""}} />
 
+        <GuardedStack.Screen name="EditProfileScreen" component={EditProfileScreen} options={{title:"Edit Profile"}} />
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
       </GuardedStack.Navigator>
     )
