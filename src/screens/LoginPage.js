@@ -63,7 +63,7 @@ const LoginPage = ({ navigation }) =>
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
-                            <Button dark={true} disabled={isLoading} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
+                            <Button dark={true} disabled={isLoading || (email == '' || password =='')} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
                                 {isLoading ? "Loading..." : "Masuk"}
                             </Button>
                             <Text onPress={() => { navigation.navigate('Register') }} style={{ 'marginVertical': 10,paddingVertical:20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>

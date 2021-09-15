@@ -60,17 +60,19 @@ const RegisterScreen = ({ navigation }) =>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'margin': 10, marginHorizontal: 20 }} />
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'margin': 10, marginHorizontal: 20 }} />
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'margin': 10, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'margin': 8, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'margin': 8, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'margin': 8, marginHorizontal: 20 }} />
                             <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
                                 secureTextEntry={passwordHide} style={{ 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
-                        <View style={{ 'alignContent': 'center' }}>
-                            <GlobalButton onPress={storeData} title={isLoading ? 'Mohon menunggu...' : 'Daftar'} disabled={isLoading} style={{ 'margin': 10 }} />
-                            <Text onPress={() => { navigation.navigate('Login') }} style={{ 'marginTop': 10, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
+                        <View style={{ 'alignContent': 'center',marginBottom:20 }}>
+                            <GlobalButton onPress={storeData} title={isLoading ? 'Mohon menunggu...' : 'Daftar'} disabled={isLoading || (
+                                username == '' || phoneNumber =='' || email == '' || password == ''
+                            )} style={{ 'margin': 10 }} />
+                            <Text onPress={() => { navigation.navigate('Login') }} style={{ 'marginTop': 8, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
                                 Sudah daftar? Login Disini
                             </Text>
                         </View>
