@@ -41,7 +41,7 @@ import { MMKV } from 'react-native-mmkv';
 import DoctorDetailScreen from './screens/DoctorDetailScreen';
 import DoctorNotesQuesioner from './screens/DoctorNotesQuesioner';
 import EditProfileScreen from './screens/EditProfileScreen';
-
+import SplashScreen from 'react-native-splash-screen';
 
 
 const MyTheme = {
@@ -57,6 +57,7 @@ const App = () =>
 {
   useEffect(() =>
   {
+    SplashScreen.hide()
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, [])
 
