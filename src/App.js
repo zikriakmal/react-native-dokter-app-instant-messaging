@@ -10,7 +10,7 @@
 import 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import React, { useState, useEffect } from 'react';
-import { useColorScheme, View, } from 'react-native';
+import { StatusBar, useColorScheme, View, } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, DefaultTheme, useRoute } from '@react-navigation/native';
@@ -42,6 +42,7 @@ import DoctorDetailScreen from './screens/DoctorDetailScreen';
 import DoctorNotesQuesioner from './screens/DoctorNotesQuesioner';
 import EditProfileScreen from './screens/EditProfileScreen';
 import SplashScreen from 'react-native-splash-screen';
+import FileScreen from './screens/FileScreen';
 
 
 const MyTheme = {
@@ -89,18 +90,19 @@ const App = () =>
     return (
       <GuardedStack.Navigator>
         <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
-        <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
-        <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
-
         <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen} options={{title:'Buat Janji'}}  />
         <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
         <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  options={({route})=>({title:'Tanya Dokter'})} />
+
         <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen} options={({route})=>({title:'Catatan Dokter'})}   />
-
         <GuardedStack.Screen name="DoctorNotesQuesionerScreen" component={DoctorNotesQuesioner} options={({route})=>({title:'Quesioner'})}   />
+        
+        <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
+        <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
+        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{title:"Profil Dokter",headerTitleAlign:'center'}} h />
 
-        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{title:""}} />
+        <GuardedStack.Screen name="FileScreen" component={FileScreen} options={{title:"Materi"}} />
 
         <GuardedStack.Screen name="EditProfileScreen" component={EditProfileScreen} options={{title:"Edit Profile"}} />
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}

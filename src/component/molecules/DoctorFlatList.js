@@ -33,8 +33,8 @@ const DokterChild = ({ navigation, origin, id, name, status, photoPath, isFetche
                     }} />
 
                     <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 20 }}>
-                        <Text style={{ fontSize: 18, fontWeight: '300' }}>{name}</Text>
-                        <Text style={{ fontSize: 14, fontWeight: '800', color: "#2e2e2e" }}>{status}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: '300' }}>{name}</Text>
+                        <Text style={{ fontSize: 12, fontWeight: '800', color: "#2e2e2e" }}>{status}</Text>
                     </View>
                 </View>
                 :
@@ -46,8 +46,8 @@ const DokterChild = ({ navigation, origin, id, name, status, photoPath, isFetche
                         overflow: "hidden"
                     }} />
                     <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 20 }}>
-                        <ShimmerPlaceHolder style={{ fontSize: 18, fontWeight: '300',marginVertical:5,borderRadius:10 }} />
-                        <ShimmerPlaceHolder style={{ fontSize: 14, fontWeight: '800', color: "#2e2e2e",borderRadius:10 }} />
+                        <ShimmerPlaceHolder style={{ fontSize: 16, fontWeight: '300',marginVertical:5,borderRadius:10 }} />
+                        <ShimmerPlaceHolder style={{ fontSize: 12, fontWeight: '800', color: "#2e2e2e",borderRadius:10 }} />
                     </View>
                 </View>}
         </RectButton>

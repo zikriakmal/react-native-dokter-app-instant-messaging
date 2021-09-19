@@ -6,7 +6,7 @@ const GlobalButton = ({ title, ...props }) =>
 {
     return (
         <View>
-            <Button dark={true} style={style.button} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} 
+            <Button dark={true} style={style.button} labelStyle={{fontSize:10}} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} 
                 mode="contained" {...props}>
                 { title }
             </Button>
@@ -15,7 +15,7 @@ const GlobalButton = ({ title, ...props }) =>
 }
 
 const style = StyleSheet.create({
-    button: { }
+    button: { fontSize:14}
 })
 
 export default GlobalButton

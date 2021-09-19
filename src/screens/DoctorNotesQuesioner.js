@@ -23,10 +23,10 @@ const DoctorNotesQuesioner = ({navigation}) =>
 
     return (
         <SafeAreaView>
-            <View style={{marginHorizontal:10}}>
+            <View style={{marginHorizontal:20}}>
                 {questionData.map((dt, index) =>
                     <View style={{marginVertical:10}} key={index}>
-                        <Text style={{fontWeight:"800",fontSize:16}}>{dt.question}</Text>
+                        <Text style={{fontWeight:"800",fontSize:14}}>{dt.question}</Text>
                         <TextInput mode="outlined" key={dt.id} onChangeText={(data) =>
                         {
                             dt.answer = data;

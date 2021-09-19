@@ -3,38 +3,40 @@ import { View, Text, Image, StyleSheet, ScrollView, SafeAreaView } from 'react-n
 import GlobalButton from '../component/atoms/GlobalButton'
 
 
-const DoctorDetailScreen = ({route,navigation}) =>
+const ChildComp = ({ title, value }) =>
 {
-    const data= route.params.data;
+    return (<View style={{ backgroundColor: 'white', marginHorizontal: 20, marginVertical: 5, borderRadius: 10, padding: 15, elevation: 3 }}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', padding: 10, paddingBottom: 0 }} >{title}</Text>
+        <Text style={{ fontSize: 12, fontWeight: '300', padding: 10 }} >{value}</Text>
+    </View>)
+}
+
+
+const DoctorDetailScreen = ({ route, navigation }) =>
+{
+    const data = route.params.data;
 
     return (
         <SafeAreaView >
-            <ScrollView style={{ backgroundColor: '#f2f2f2',height:"89%" }}>
-                <View style={{ backgroundColor: 'white', marginBottom: 10,paddingBottom:15,elevation:5 }}>
-                    <Image source={{uri:route.params.uri}} style={{
+            <ScrollView style={{ backgroundColor: '#f2f2f2', height: "89%" }}>
+                <View style={{ backgroundColor: 'white', marginBottom: 10 }}>
+                    <Image source={{ uri: route.params.uri }} style={{
                         width: '100%',
-                        height: 200,
+                        height: 250,
                         overflow: "hidden",
                     }} />
 
-                    <Text style={styles.header_text} >{route.params.name}</Text>
-                    <Text style={{fontSize:20,textAlign:'center'}} ></Text>
+                    <View elevation={8}  style={{padding:10,marginTop:-25,paddingBottom:30,backgroundColor:'white',borderTopLeftRadius:50,borderTopRightRadius:50}}>
+                        <Text style={styles.header_text} >{route.params.name}</Text>
+                        <Text style={{ fontSize: 12, fontWeight: 'bold', textAlign: 'center' }} >{data.status}</Text>
+                    </View>
                 </View>
-                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15,elevation:3 }}>
-                    <Text style={{fontSize:20,fontWeight:'bold',padding:10,paddingBottom:5}} >Nomor STR</Text>
-                    <Text style={{fontSize:18,fontWeight:'300',padding:10}} >{data.str}</Text>
-                </View>
-                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15,elevation:3 }}>
-                    <Text style={{fontSize:20,fontWeight:'bold',padding:10,paddingBottom:5}} >Pendidikan Terakhir</Text>
-                    <Text style={{fontSize:18,fontWeight:'300',padding:10}} >{data.education}</Text>
-                </View>
-                <View style={{ backgroundColor: 'white', margin: 10,borderRadius:10,padding:15,elevation:3 }}>
-                    <Text style={{fontSize:20,fontWeight:'bold',padding:10,paddingBottom:5}} >Tempat Praktik</Text>
-                    <Text style={{fontSize:18,fontWeight:'300',padding:10}} >{data.hospital}</Text>
-                </View>
+                <ChildComp title={'Pendidikan Terakhir'} value={data.education} />
+                <ChildComp title={'Tempat Praktik'} value={data.hospital} />
+
             </ScrollView>
-            <View style={{padding:15,paddingBottom:10, }}>
-                <GlobalButton title="Chat Sekarang" onPress={()=> navigation.navigate('ChatDetail', { name: route.params.name ,id:route.params.id  })}/>
+            <View style={{ padding: 15, paddingBottom: 10, }}>
+                <GlobalButton title="Chat Sekarang" onPress={() => navigation.navigate('ChatDetail', { name: route.params.name, id: route.params.id })} />
             </View>
         </SafeAreaView>
 
@@ -44,9 +46,9 @@ const DoctorDetailScreen = ({route,navigation}) =>
 const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 18,
         margin: 5,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
 });
 

@@ -9,7 +9,7 @@ const MenuChild = ({ name, icon, navigation, route }) =>
         <View style={{ display: 'flex', flex: 1 }}>
             <TouchableRipple
                 borderless={true}
-                style={{ borderRadius: 20, padding: 10 }}
+                style={{ borderRadius: 20, padding: 0}}
                 onPress={() => navigation.navigate(route)}
                 rippleColor="#FF826B"
             >
@@ -22,7 +22,7 @@ const MenuChild = ({ name, icon, navigation, route }) =>
                             shadowOffset: { width: 2, height: 2 }, shadowColor: 'black',
                         }
                     } />
-                    <Text style={{ 'alignSelf': 'center','textAlign':'center', 'fontWeight': '600', 'marginTop': 10 }}>{name}</Text>
+                    <Text style={{ 'fontSize':10,'alignSelf': 'center','textAlign':'center', 'fontWeight': '600', 'marginTop': 10 }}>{name}</Text>
                 </View>
             </TouchableRipple>
         </View>
@@ -40,9 +40,10 @@ const MenuComponent = ({ navigation }) =>
         borderRadius: 10, backgroundColor: 'white', marginVertical: 10, paddingHorizontal: 20, paddingVertical: 20, shadowRadius: 3, shadowOpacity: 0.2,
         shadowOffset: { width: 2, height: -1 }, shadowColor: 'black',}}>
 
-        <MenuChild icon='calendar' name="Buat Janji" navigation={navigation} route='AppointmentScreen' />
+        {/* <MenuChild icon='calendar' name="Buat Janji" navigation={navigation} route='AppointmentScreen' /> */}
         <MenuChild icon='comment-edit' name="Tanya Dokter" navigation={navigation} route='AskDoctorScreen' />
         <MenuChild icon='note' name="Catatan Dokter" navigation={navigation} route='DoctorNotesScreen' />
+        <MenuChild icon='download' name="Materi" navigation={navigation} route='FileScreen' />
         
     </View>
     )

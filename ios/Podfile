@@ -15,6 +15,8 @@ target 'DokterApp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+
   target 'DokterAppTests' do
     inherit! :complete
     # Pods for testing

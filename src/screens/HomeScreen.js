@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, TouchableHighlight, Image, FlatList, TouchableOpacity, ActivityIndicator, Dimensions, RefreshControl } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient';
+
+import { View, Text, SafeAreaView, ScrollView, ActivityIndicator, Dimensions, RefreshControl, StatusBar } from 'react-native'
 import { Avatar } from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
+
+import { MMKV } from 'react-native-mmkv';
+
+import { GetInfo } from '../services/user.service';
+import { GetDoctorList } from '../services/doctor.service';
 
 import MenuComponent from '../component/organisms/MenuComponent';
 import FindDoctorComponent from '../component/organisms/FindDoctorComponent';
-import { MMKV } from 'react-native-mmkv';
-import { GetInfo } from '../services/user.service';
-import { GetDoctorList } from '../services/doctor.service';
+
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 
@@ -99,10 +102,12 @@ const HomeScreen = ({ navigation }) =>
             start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
             colors={['tomato', '#FF826B', '#ffb1a3']}>
             <SafeAreaView >
+
                 {/* <AppScrollViewIOSBounceColorsWrapper 
                     topBounceColor="#FF826B"
                     bottomBounceColor="white"> 
                 //  <ScrollView nestedScrollEnabled={true} keyboardShouldPersistTaps='always' style={{ flex: 1 }}> */}
+            <StatusBar backgroundColor="transparent" translucent/>
                 <ScrollView
                     style={{ flex: 1 }}
                     refreshControl={
@@ -149,22 +154,22 @@ const HomeScreen = ({ navigation }) =>
                         />
                     }
                     style={{ 'backgroundColor': 'white' }}>
-                    <View style={{ height: fullHeight }}>
-
-                        <View >
+                    <View style={{ height: fullHeight,alignContent:'space-between' }}>
+                        <View  >
                             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['tomato', '#FF826B', '#ffb1a3']}
                                 style={{
                                     backgroundColor: 'white',
-                                    height: 160,
+                                    height: 180,
                                     borderBottomLeftRadius: 50,
                                     borderBottomRightRadius: 50,
                                     borderBottomStartRadius: 50,
                                     borderBottomEndRadius: 50,
                                     padding: 20,
+                                     
                                 }}>
                                 {loadingState ? <ActivityIndicator animating={true} color='white' /> : <Text></Text>}
                                 {isFetched ?
-                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                    <View style={{ display: 'flex', flexDirection: 'row','marginHorizontal':25,marginVertical:20 }}>
                                         <Avatar.Image size={50} source={{ uri: photo }} />
                                         <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
                                     </View>
@@ -183,9 +188,9 @@ const HomeScreen = ({ navigation }) =>
                                 }
                             </LinearGradient>
                         </View>
-                        <View style={{ zIndex: 4, marginTop: -70, margin: 20, display: 'flex' }} >
-                            <MenuComponent navigation={navigation} />
-                            <FindDoctorComponent navigation={navigation} isLoading={isLoading}
+                        <View style={{ zIndex: 4, marginTop: -60, margin: 20,marginHorizontal:40, display: 'flex' }} >
+                            <MenuComponent navigation={navigation}  />
+                            <FindDoctorComponent navigation={navigation}  isLoading={isLoading}
                                 nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} isFetched={isFetchedDoctor} />
                             <View style={{ 'backgroundColor': 'white', 'height': '100%' }}></View>
                         </View>

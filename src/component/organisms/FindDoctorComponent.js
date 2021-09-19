@@ -6,10 +6,6 @@ import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 import LinearGradient from 'react-native-linear-gradient';
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
 
-
-
-
-
 const DokterChild = ({ navigation, id, name, status, photoPath, datanya, isFetched, ...props }) =>
 {
 
@@ -22,19 +18,20 @@ const DokterChild = ({ navigation, id, name, status, photoPath, datanya, isFetch
                 navigation.navigate('DoctorDetailScreen', { name: name, id: id, uri: photoPath, data: datanya });
             }}>
             {isFetched ?
-                <View style={{ 'display': 'flex', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
+                <View style={{ 'display': 'flex','alignContent':'space-between', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
                     <Image source={{ uri: photoPath }} style={{
                         width: 50,
                         height: 50,
                         borderRadius: 150 / 2,
                         overflow: "hidden",
                         borderWidth: 3,
-                        borderColor: "tomato"
+                        borderColor: "tomato",
+
                     }} />
 
-                    <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 20 }}>
-                        <Text style={{ fontSize: 18, fontWeight: '300' }}>{name}</Text>
-                        <Text style={{ fontSize: 14, fontWeight: '800', color: "#2e2e2e" }}>{status}</Text>
+                    <View style={{ 'display': 'flex', 'flexDirection': 'column', 'marginHorizontal': 22 }}>
+                        <Text style={{ fontSize: 14, fontWeight: '300' }}>{name}</Text>
+                        <Text style={{ fontSize: 12, fontWeight: '800', color: "#2e2e2e" }}>{status}</Text>
                     </View>
                 </View>
                 :
@@ -46,8 +43,8 @@ const DokterChild = ({ navigation, id, name, status, photoPath, datanya, isFetch
                         overflow: "hidden"
                     }} />
                     <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 20 }}>
-                        <ShimmerPlaceHolder style={{ fontSize: 18, fontWeight: '300', marginVertical: 5, borderRadius: 10 }} />
-                        <ShimmerPlaceHolder style={{ fontSize: 14, fontWeight: '800', color: "#2e2e2e", borderRadius: 10 }} />
+                        <ShimmerPlaceHolder style={{ fontSize: 16, fontWeight: '300', marginVertical: 5, borderRadius: 10 }} />
+                        <ShimmerPlaceHolder style={{ fontSize: 12, fontWeight: '800', color: "#2e2e2e", borderRadius: 10 }} />
                     </View>
                 </View>}
         </RectButton>
@@ -71,8 +68,8 @@ const FindDoctorComponent = ({ data, navigation, endOfDoctorFunc, isLoading, isF
 {
     return (
         <View style={styles.container} elevation={10} >
-            <Text style={{ alignSelf: 'center', 'marginTop': 15, 'marginBottom': 5, fontSize: 20, fontWeight: 'bold', color: 'tomato' }}>Chat langsung dengan dokter</Text>
-            <Text style={{ alignSelf: 'center', 'marginBottom': 5, fontSize: 14, color: '#3d3d3d',fontWeight:'800' }}>Chat bersama dokter</Text>
+            <Text style={{ alignSelf: 'center', 'marginTop': 15, 'marginBottom': 5, fontSize: 18, fontWeight: 'bold', color: 'tomato' }}>Chat langsung</Text>
+            <Text style={{ alignSelf: 'center', 'marginBottom': 5, fontSize: 12, color: '#3d3d3d',fontWeight:'800' }}>konsultasi dengan chat secara langsung</Text>
             <View
                 elevation={20}
                 style={{
@@ -118,7 +115,8 @@ const FindDoctorComponent = ({ data, navigation, endOfDoctorFunc, isLoading, isF
 const styles = StyleSheet.create({
     container: {
         borderColor: '#dddddd',
-        height: Dimensions.get('window').height - (Dimensions.get('window').height * 0.53),
+        height: Dimensions.get('window').height - (Dimensions.get('window').height * 0.46),
+        paddingHorizontal:10,
         borderWidth: 0.5,
         borderRadius: 10,
         shadowRadius: 3, shadowOpacity: 0.2,

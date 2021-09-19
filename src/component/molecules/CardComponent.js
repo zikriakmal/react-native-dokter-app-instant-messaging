@@ -46,20 +46,20 @@ const CardComponent = ({ photoPath, data, isFetched }) =>
                             <Avatar.Image source={{ uri: photoPath }} />
                         </View>
                         <View style={{ padding: 10 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Anda</Text>
-                            <Text style={{ fontSize: 12 }}>Ditanyakan pada {dateFormat(data.updated_at, "dd/mm/yyyy, H:MM")} </Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Anda</Text>
+                            <Text style={{ fontSize: 10 }}>Ditanyakan pada {dateFormat(data.updated_at, "dd/mm/yyyy, H:MM")} </Text>
                         </View>
                     </View>
-                    <Text style={{ fontSize: 17 }} numberOfLines={4}>{data.question}.</Text>
+                    <Text style={{ fontSize: 12 }} numberOfLines={4}>{data.question}.</Text>
                     <View style={{ display: 'flex', flexDirection: 'row', 'justifyContent': 'space-between' }}>
                         <Text onPress={(data) => { setModalVisible(true) }} style={{
                             backgroundColor: data.is_answered ? 'green' : 'tomato',
                             alignSelf: 'center',
-                            color: data.is_answered ? 'white' : 'white', borderRadius: 30, fontSize: 12, textAlign: 'left', marginTop: 15, paddingHorizontal: 20, paddingVertical: 3
+                            color: data.is_answered ? 'white' : 'white', borderRadius: 30, fontSize: 10, textAlign: 'left', marginTop: 15, paddingHorizontal: 20, paddingVertical: 3
                         }}>
                             {data.is_answered ? 'Telah Dijawab' : 'Belum Dijawab'}
                         </Text>
-                        <Text onPress={(data) => { setModalVisible(true) }} style={{ fontSize: 12, textDecorationLine: 'underline', textAlign: 'right', marginTop: 15, paddingVertical: 10 }}>Lihat Detail</Text>
+                        <Text onPress={(data) => { setModalVisible(true) }} style={{ fontSize: 10, textDecorationLine: 'underline', textAlign: 'right', marginTop: 15, paddingVertical: 10 }}>Lihat Detail</Text>
                     </View>
                 </View> :
                 <View>
