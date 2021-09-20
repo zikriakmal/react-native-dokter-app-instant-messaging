@@ -23,14 +23,33 @@ const DoctorNotesScreen = ({ navigation }) =>
             getPostedQuestionNotes().then((data) =>
             {
                 setPostedData(data.data.data)
-                if (postedData.length == 0) {
+                const datanya = data.data.data;
+                setIsFetched(true);
+
+                if (datanya.length == 0) {
                     setIsEmpty(true)
                 } else {
                     setIsEmpty(false)
                 }
-                setIsFetched(true);
             })
+
         }
+
+        const willFocusSubscription = navigation.addListener('focus', () =>
+        {
+            getPostedQuestionNotes().then((data) =>
+            {
+                setPostedData(data.data.data)
+                const datanya = data.data.data;
+                setIsFetched(true);
+
+                if (datanya.length == 0) {
+                    setIsEmpty(true)
+                } else {
+                    setIsEmpty(false)
+                }
+            })
+        });
     })
 
 
@@ -41,7 +60,7 @@ const DoctorNotesScreen = ({ navigation }) =>
                 <Text style={{ marginTop: 20, fontSize: 15, fontWeight: 'bold' }}> Daftar pengajuan catatan</Text>
             </View>
             {isEmpty ?
-                <View style={{ marginVertical: 50 }}>
+                <View style={{ marginVertical: 50, height: "50%" }}>
                     <Image source={require('../assets/nodata.png')} style={{ 'width': "75%", alignSelf: 'center', 'height': 200 }} />
                     <Text style={{ color: 'tomato', fontWeight: 'bold', alignSelf: 'center' }}>Belum ada pengajuan catatan</Text>
                     <Text style={{ color: 'tomato', fontWeight: 'bold', alignSelf: 'center' }}>Ayo mulai ajukan!</Text>

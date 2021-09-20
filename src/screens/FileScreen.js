@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, Image, PermissionsAndroid, ScrollView } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-paper'
 import RNFetchBlob from 'rn-fetch-blob';
 import { GetFileList } from '../services/file.service';
@@ -22,9 +23,9 @@ const FileScreen = () =>
             GetFileList().then((data) =>
             {
                 setFileList(data.data.data)
-                if (fileList.length == 0) {
+                if(data.data.data == 0){
                     setIsEmpty(true)
-                } else {
+                }else{
                     setIsEmpty(false)
                 }
                 setIsFetched(true)
@@ -58,6 +59,7 @@ const CardedComponent = ({ name, path }) =>
 {
     const checkPermission = async (url) =>
     {
+        
         // Function to check the platform
         // If Platform is Android then check for permissions.
         if (Platform.OS === 'ios') {
@@ -90,7 +92,6 @@ const CardedComponent = ({ name, path }) =>
     const downloadFile = (url) =>
     {
         console.log(url)
-        setIsDownloaded(true)
         // Get today's date to add the time suffix in filename
         let date = new Date();
         // File URL which we want to download
@@ -124,7 +125,6 @@ const CardedComponent = ({ name, path }) =>
             {
                 // Alert after successful downloading
                 console.log('res -> ', JSON.stringify(res));
-                setIsDownloaded(false)
                 // alert('File Downloaded Successfully.');
             });
     };
@@ -138,7 +138,7 @@ const CardedComponent = ({ name, path }) =>
     return (
         <View elevation={5} style={{ alignItems: 'center', backgroundColor: 'white', marginVertical: 10, marginHorizontal: 10, padding: 20, display: 'flex', flexDirection: 'row', alignContent: 'space-around', borderRadius: 20 }}>
             <Text style={{ flex: 2, alignSelf: 'center', fontSize: 12 }}>{name}</Text>
-            <View onPress={() => { checkPermission(path) }} style={{ flex: 1, alignItems: 'flex-end' }}>
+            <RectButton onPress={() => { checkPermission(path) }} style={{ flex: 1, alignItems: 'flex-end' }}>
                 <Avatar.Icon elevation={10} size={40} color={'white'} icon={"download"} style={
                     {
                         width: 40,
@@ -149,7 +149,7 @@ const CardedComponent = ({ name, path }) =>
                     }
                 }
                 />
-            </View>
+            </RectButton>
         </View>
     )
 
