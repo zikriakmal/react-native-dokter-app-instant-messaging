@@ -174,7 +174,7 @@ const HomeScreen = ({ navigation }) =>
                                         <Text style={{ color: 'white', alignSelf: 'center', 'marginHorizontal': 15, 'fontWeight': 'bold', 'fontSize': 18 }}>{username}</Text>
                                     </View>
                                     :
-                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                    <View style={{ display: 'flex', flexDirection: 'row',marginHorizontal:25,marginVertical:20 }}>
                                         <ShimmerPlaceholder LinearGradient={LinearGradient} style={{ height: 50, width: 50, borderRadius: 100 }} />
                                         <ShimmerPlaceholder LinearGradient={LinearGradient} style={{
                                             fontSize: 18,
@@ -188,7 +188,7 @@ const HomeScreen = ({ navigation }) =>
                                 }
                             </LinearGradient>
                         </View>
-                        <View style={{ zIndex: 4, marginTop: -60, margin: 20,marginHorizontal:40, display: 'flex' }} >
+                        <View style={{ zIndex: 4, marginTop: -60, margin: 35, display: 'flex' }} >
                             <MenuComponent navigation={navigation}  />
                             <FindDoctorComponent navigation={navigation}  isLoading={isLoading}
                                 nestedScrollEnabled={true} data={doctors} endOfDoctorFunc={gettingComplex} isFetched={isFetchedDoctor} />

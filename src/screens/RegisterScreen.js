@@ -55,9 +55,9 @@ const RegisterScreen = ({ navigation }) =>
                     <View>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
                             <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5, marginTop: 30 }}>MESH-Teen </Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '100', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '100', 'margin': 1 }}>Registrasi</Text>
-                            <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '100', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '700', 'margin': 10 }}>Registrasi</Text>
+                            <Image source={require('../assets/ayodokter.png')} style={{ 'width': "100%", 'height': 200 }} />
                         </View>
                         <View>
                             <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'margin': 8, marginHorizontal: 20 }} />
@@ -68,9 +68,9 @@ const RegisterScreen = ({ navigation }) =>
                                 secureTextEntry={passwordHide} style={{ 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
-                        <View style={{ 'alignContent': 'center',marginBottom:20 }}>
+                        <View style={{ 'alignContent': 'center', marginBottom: 20 }}>
                             <GlobalButton onPress={storeData} title={isLoading ? 'Mohon menunggu...' : 'Daftar'} disabled={isLoading || (
-                                username == '' || phoneNumber =='' || email == '' || password == ''
+                                username == '' || phoneNumber == '' || email == '' || password == ''
                             )} style={{ 'margin': 10 }} />
                             <Text onPress={() => { navigation.navigate('Login') }} style={{ 'marginTop': 8, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
                                 Sudah daftar? Login Disini

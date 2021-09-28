@@ -49,7 +49,7 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
+    primary: 'tomato',
     background: 'white'
   },
 };
@@ -93,9 +93,9 @@ const App = () =>
         <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen} options={{title:'Buat Janji'}}  />
         <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
-        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  options={({route})=>({title:'Tanya Dokter'})} />
+        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  options={({route})=>({title:'Pertanyaan'})} />
 
-        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen} options={({route})=>({title:'Catatan Dokter'})}   />
+        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen} options={({route})=>({title:'Quesioner'})}   />
         <GuardedStack.Screen name="DoctorNotesQuesionerScreen" component={DoctorNotesQuesioner} options={({route})=>({title:'Quesioner'})}   />
         
         <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
@@ -120,6 +120,7 @@ const App = () =>
          
         barStyle={{
           backgroundColor: '#ffffff',
+          padding:5,
           elevation: 24, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
         }}
         screenOptions={({ route }) => ({
@@ -142,7 +143,7 @@ const App = () =>
           },
         })}>
         {MMKV.getNumber('type') == 1 ? <Tab.Screen name="HomeScreen" component={HomeScreen}  options={{tabBarLabel: 'Home'}} /> : null } 
-        <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{ tabBarLabel: 'Chats' }} />
+        <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{headerShown:true, tabBarLabel: 'Chats' }} />
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{ tabBarLabel: 'Profile' }} />
 
       </Tab.Navigator>

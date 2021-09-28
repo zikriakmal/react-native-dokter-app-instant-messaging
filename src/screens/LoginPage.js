@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { Button, TextInput } from 'react-native-paper'
 import { MMKV } from 'react-native-mmkv';
 import { useDispatch } from 'react-redux'
-import {Auth} from '../services/auth.service'
+import { Auth } from '../services/auth.service'
 
 
 const LoginPage = ({ navigation }) =>
@@ -28,15 +28,15 @@ const LoginPage = ({ navigation }) =>
         {
             if (data.data.status == "success") {
                 MMKV.set('isLogin', true)
-                MMKV.set('access_token',data.data.data.access_token)
-                MMKV.set('type',data.data.data.member_type)
-                MMKV.set('userId',data.data.data.firebase_id)
+                MMKV.set('access_token', data.data.data.access_token)
+                MMKV.set('type', data.data.data.member_type)
+                MMKV.set('userId', data.data.data.firebase_id)
                 setIsLoading(false)
-                dispatch({type:'SET_LOGIN',token:data.data.data.access_token})
+                dispatch({ type: 'SET_LOGIN', token: data.data.data.access_token })
                 return 0;
             }
             setIsLoading(false)
-            Alert.alert('Login',"Email Atau Password Salah");
+            Alert.alert('Login', "Email Atau Password Salah");
         });
 
     }
@@ -46,27 +46,31 @@ const LoginPage = ({ navigation }) =>
         <SafeAreaView style={{ 'backgroundColor': 'white', 'height': '100%' }} >
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={{height:'100%'}}>
+                style={{ height: '100%' }}
+            >
                 <ScrollView >
-                    <View>
+                    <View style={{ marginHorizontal: 40 }}>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5,marginTop:30 }}>MESH-Teen </Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': '100', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
-                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '100', 'margin': 6 }}>Masuk</Text>
-                            <Image source={require('../assets/ayodokter.png')} style={{ 'width': "75%", 'height': 200 }} />
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5, marginTop: 30 }}>MESH-Teen </Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '100', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
+                            <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '700', 'margin': 10 }}>Masuk</Text>
+                            <Image source={require('../assets/ayodokter.png')} style={{ 'width': "100%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'margin': 15 }} onChangeText={(data) => { setEmail(data) }} />
+                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'marginVertical': 10 }} onChangeText={(data) => { setEmail(data) }} />
                             <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'margin': 15 }} right={<TextInput.Icon
+                                secureTextEntry={passwordHide} style={{ 'marginVertical': 5 }} right={<TextInput.Icon 
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
-                            <Button dark={true} disabled={isLoading || (email == '' || password =='')} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'marginLeft': 15, 'marginRight': 15 }} mode="contained" onPress={storeData}>
+                            <Button dark={true}
+                                disabled={isLoading || (email == '' || password == '')}
+                                theme={{ roundness: 20 }} contentStyle={{ height: 45 }}
+                                style={{ marginVertical: 20 }} mode="contained" onPress={storeData}>
                                 {isLoading ? "Loading..." : "Masuk"}
                             </Button>
-                            <Text onPress={() => { navigation.navigate('Register') }} style={{ 'marginVertical': 10,paddingVertical:20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
+                            <Text onPress={() => { navigation.navigate('Register') }} style={{ paddingVertical: 20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
                                 Daftar Disini
                             </Text>
                         </View>

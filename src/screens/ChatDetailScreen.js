@@ -6,6 +6,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import firestore from '@react-native-firebase/firestore';
 import { MMKV } from 'react-native-mmkv';
+import dateFormat from 'dateformat';
 
 
 
@@ -48,7 +49,7 @@ const FlatListBasics = ({ navigation, chat,replyName }) =>
                 ref={myList}
                 onContentSizeChange={() => myList?.current?.scrollToEnd({ animated: true })} // scroll end
                 data={chat}
-                renderItem={({ item }) => <ChatChild style={styles.item} replyName ={replyName} key={item.data.id} text={item.data.text} date={item.data.created_at.toDate().toDateString()} type={item.data.type} navigation={navigation} />}
+                renderItem={({ item }) => <ChatChild style={styles.item} replyName ={replyName} key={item.data.id} text={item.data.text} date={ dateFormat(item.data.created_at.toDate(), "dd/mm/yyyy, H:MM")} type={item.data.type} navigation={navigation} />}
             // onScrollAnimationEnd={false}
             />
         </View>)
@@ -86,7 +87,7 @@ const ChatChild = ({ text, date, type,replyName, ...props }) =>
                         fontSize: 15, fontWeight: 'bold'
                     }}>{type == 1 ? 'You' : replyName }</Text>
                     <Text style={{ color: type == 1 ? 'white' : 'black', fontSize: 14, fontWeight: '300' }}>{text}</Text>
-                    <Text style={{ color: type == 1 ? 'white' : 'black', alignSelf: type == 1 ? 'flex-end' : 'flex-start', fontSize: 10, fontWeight: '800' }}>{date}</Text>
+                    <Text style={{ color: type == 1 ? 'white' : 'black', alignSelf: type == 1 ? 'flex-end' : 'flex-start', fontSize: 8, fontWeight: '800' }}>{date}</Text>
                 </View>
             </View>
         </TouchableHighlight>

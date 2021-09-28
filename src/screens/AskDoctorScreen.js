@@ -52,9 +52,11 @@ const AskDoctorScreen = () =>
                         multiline
                         mode="outlined"
                         value={question}
+                        error={'tes'} 
                         numberOfLines={3}
                         style={{ marginVertical: 10 }}
                         onChangeText={(data) => setQuestion(data)}
+                        placeholder="Ketik disini pertanyaan kamu..."
                     >
                     </TextInput>
                     <View style={{ display: 'flex', flexDirection: 'row', marginHorizontal: -6 }}>
@@ -71,7 +73,7 @@ const AskDoctorScreen = () =>
 
 
                 <View style={{ margin: 2, marginHorizontal: 20 }}>
-                    <GlobalButton disabled={question == ""} title={isLoading ? "Loading..." : "Kirim Pertanyaan"} disabled={isLoading ? true : false} onPress={() =>
+                    <GlobalButton  title={isLoading ? "Loading..." : "Kirim Pertanyaan"} disabled={isLoading || question == "" ? true : false} onPress={() =>
                     {
                         setIsLoading(true);
                         postAskQuestion(question, 1).then((data) =>

@@ -5,11 +5,11 @@ import { RectButton } from 'react-native-gesture-handler';
 
 
 
-const ChatChildComponent = ({ navigation, name, lastChat, ...props }) =>
+const ChatChildComponent = ({ navigation, name,photoPath, lastChat, ...props }) =>
 {
     return (
                 <View style={{ 'display': 'flex', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
-                    <Image source={require('../../assets/ayodokter.png')} style={{
+                    <Image source={{uri:photoPath}} style={{
                         width: 50,
                         height: 50,
                         borderRadius: 150 / 2,
@@ -17,10 +17,10 @@ const ChatChildComponent = ({ navigation, name, lastChat, ...props }) =>
                         borderWidth: 3,
                         borderColor: "tomato"
                     }} />
-                    <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 20 }}>
-                        <Text style={{ fontSize: 18, fontWeight: '300' }}>{name}</Text>
-                        <Text style={{ fontSize: 14, fontWeight: '700', color: "#2e2e2e" }}>{lastChat}</Text>
-                        <Text style={{ fontSize: 14, fontWeight: '700', color: "#2e2e2e" }}></Text>
+
+                    <View style={{ 'display': 'flex', 'flexDirection': 'column', 'marginHorizontal': 22 }}>
+                        <Text style={{ fontSize: 14, fontWeight: '300' }}>{name}</Text>
+                        <Text style={{ fontSize: 12, fontWeight: '800', color: "#2e2e2e" }}>{lastChat}</Text>
                     </View>
                 </View>
     )

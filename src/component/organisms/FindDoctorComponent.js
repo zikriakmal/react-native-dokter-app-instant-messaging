@@ -35,16 +35,16 @@ const DokterChild = ({ navigation, id, name, status, photoPath, datanya, isFetch
                     </View>
                 </View>
                 :
-                <View style={{ 'display': 'flex', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
+                <View style={{ 'display': 'flex','alignContent':'space-between', 'flexDirection': 'row', padding: 20, borderBottomWidth: 1, borderBottomColor: '#dddddd' }}>
                     <ShimmerPlaceHolder style={{
                         width: 50,
                         height: 50,
                         borderRadius: 150 / 2,
                         overflow: "hidden"
                     }} />
-                    <View style={{ 'display': 'flex', 'flexDirection': 'column', 'paddingHorizontal': 20 }}>
-                        <ShimmerPlaceHolder style={{ fontSize: 16, fontWeight: '300', marginVertical: 5, borderRadius: 10 }} />
-                        <ShimmerPlaceHolder style={{ fontSize: 12, fontWeight: '800', color: "#2e2e2e", borderRadius: 10 }} />
+                    <View style={{ 'display': 'flex', 'flexDirection': 'column', 'marginHorizontal': 22 }}>
+                        <ShimmerPlaceHolder style={{ fontSize: 16, fontWeight: '300',width:'75%', marginVertical: 5, borderRadius: 10,marginVertical:10 }} />
+                        <ShimmerPlaceHolder style={{ fontSize: 12, fontWeight: '800',width:'50%', color: "#2e2e2e", borderRadius: 10 }} />
                     </View>
                 </View>}
         </RectButton>
@@ -115,7 +115,7 @@ const FindDoctorComponent = ({ data, navigation, endOfDoctorFunc, isLoading, isF
 const styles = StyleSheet.create({
     container: {
         borderColor: '#dddddd',
-        height: Dimensions.get('window').height - (Dimensions.get('window').height * 0.46),
+        height: Dimensions.get('window').height - (Dimensions.get('window').height * 0.48),
         paddingHorizontal:10,
         borderWidth: 0.5,
         borderRadius: 10,

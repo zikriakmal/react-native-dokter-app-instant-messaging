@@ -5,7 +5,8 @@ import GlobalButton from '../component/atoms/GlobalButton'
 
 const ChildComp = ({ title, value }) =>
 {
-    return (<View style={{ backgroundColor: 'white', marginHorizontal: 20, marginVertical: 5, borderRadius: 10, padding: 15, elevation: 3 }}>
+    return (
+    <View style={{ backgroundColor: 'white', marginHorizontal: 20, marginVertical: 5, borderRadius: 10, padding: 15, elevation: 3 }}>
         <Text style={{ fontSize: 16, fontWeight: 'bold', padding: 10, paddingBottom: 0 }} >{title}</Text>
         <Text style={{ fontSize: 12, fontWeight: '300', padding: 10 }} >{value}</Text>
     </View>)
@@ -26,7 +27,7 @@ const DoctorDetailScreen = ({ route, navigation }) =>
                         overflow: "hidden",
                     }} />
 
-                    <View elevation={8}  style={{padding:10,marginTop:-25,paddingBottom:30,backgroundColor:'white',borderTopLeftRadius:50,borderTopRightRadius:50}}>
+                    <View elevation={8}  style={{padding:10,marginTop:-10,paddingBottom:30,backgroundColor:'white',borderTopLeftRadius:15,borderTopRightRadius:15}}>
                         <Text style={styles.header_text} >{route.params.name}</Text>
                         <Text style={{ fontSize: 12, fontWeight: 'bold', textAlign: 'center' }} >{data.status}</Text>
                     </View>

@@ -56,13 +56,13 @@ const DoctorNotesScreen = ({ navigation }) =>
     return (
         <SafeAreaView>
             <View style={{ paddingHorizontal: 20, paddingTop: 10, paddingBottom: 5 }}>
-                <GlobalButton title="Request Catatan" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} />
-                <Text style={{ marginTop: 20, fontSize: 15, fontWeight: 'bold' }}> Daftar pengajuan catatan</Text>
+                <GlobalButton title="Mulai isi quesioner disini" onPress={() => { navigation.navigate("DoctorNotesQuesionerScreen") }} />
+                <Text style={{ marginTop: 20, fontSize: 15, fontWeight: 'bold' }}> Daftar pengajuan quesioner</Text>
             </View>
             {isEmpty ?
                 <View style={{ marginVertical: 50, height: "50%" }}>
                     <Image source={require('../assets/nodata.png')} style={{ 'width': "75%", alignSelf: 'center', 'height': 200 }} />
-                    <Text style={{ color: 'tomato', fontWeight: 'bold', alignSelf: 'center' }}>Belum ada pengajuan catatan</Text>
+                    <Text style={{ color: 'tomato', fontWeight: 'bold', alignSelf: 'center' }}>Belum ada quesioner</Text>
                     <Text style={{ color: 'tomato', fontWeight: 'bold', alignSelf: 'center' }}>Ayo mulai ajukan!</Text>
                 </View> :
                 <FlatList
@@ -86,7 +86,7 @@ const DoctorNotesScreen = ({ navigation }) =>
                             isFetched ?
                                 <View underlayColor="#DDDDDD" onPress={() => alert('Future Feature, Coming soon')}>
                                     <View style={{ padding: 20, marginVertical: 5, marginHorizontal: 10, elevation: 5, borderRadius: 20, backgroundColor: 'white' }}>
-                                        <Text style={{ marginVertical: 5, color: 'orange', fontSize: 14 }}>Pengajuan catatan pada:</Text>
+                                        <Text style={{ marginVertical: 5, color: 'orange', fontSize: 14 }}>Pengajuan quesioner pada:</Text>
                                         <Text style={{ fontSize: 10 }}>{dateFormat(item.created_at, "dd/mm/yyyy, H:MM")}</Text>
                                         <View style={{ marginTop: 10, display: 'flex', flexDirection: 'row-reverse' }}>
                                             <Text style={{ borderRadius: 20, backgroundColor: (item.is_answered ? 'green' : 'tomato'), color: 'white', paddingVertical: 5, fontSize: 10, padding: 3, paddingHorizontal: 10, textAlign: 'center' }}>

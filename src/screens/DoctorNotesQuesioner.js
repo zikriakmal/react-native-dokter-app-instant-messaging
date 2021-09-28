@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, Alert } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import { RadioButton, TextInput } from 'react-native-paper';
 import GlobalButton from '../component/atoms/GlobalButton';
 import { getQuestion, postQuestion } from '../services/doctorNotes.service';
@@ -24,7 +24,7 @@ const DoctorNotesQuesioner = ({ navigation }) =>
 
     return (
         <SafeAreaView>
-            <View style={{ marginHorizontal: 20 }}>
+            <ScrollView style={{ marginHorizontal: 20 }}>
                 {questionData.map((dt, index) =>
                     <View style={{ marginVertical: 10 }} key={index}>
                         <Text style={{ fontWeight: "800", fontSize: 14 }}>{dt.question}</Text>
@@ -48,7 +48,7 @@ const DoctorNotesQuesioner = ({ navigation }) =>
                         navigation.navigate("DoctorNotesScreen")
                     }} />
                 </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
