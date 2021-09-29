@@ -6,6 +6,7 @@ import { MMKV } from 'react-native-mmkv'
 import { Button } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux'
+import GlobalButton from '../component/atoms/GlobalButton';
 
 const HyperChild = ({ navigation }) =>
 {
@@ -51,9 +52,8 @@ const ProfileScreen = ({ navigation }) =>
                         <Text style={{ fontSize: 18, fontWeight: '700', 'marginTop': 20, 'color': '#171717' }} >{MMKV.getString('email')}</Text>
                     </View>
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
-                        <Text style={{ fontSize: 16, fontWeight: '100', 'marginTop': 5, 'color': '#171717' }} >{MMKV.getString('phoneNumber')}</Text>
+                        <Text style={{ fontSize: 14, fontWeight: '100', 'marginTop': 5, 'color': '#171717' }} >{MMKV.getString('phoneNumber')}</Text>
                     </View>
-
                     <View style={{ display: 'flex', 'flexDirection': 'row' }}>
                         {/* <HyperChild /> */}
                         {/* <HyperChild /> */}
@@ -65,9 +65,7 @@ const ProfileScreen = ({ navigation }) =>
                     <Text style={{ fontSize: 14, 'marginTop': 20 }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam luctus tincidunt erat non blandit. Nullam nec ipsum id erat imperdiet placerat. Integer pellentesque sit amet nibh id egestas. Fusce quis sollicitudin massa. Praesent a quam in velit posuere commodo. Morbi mattis nisi placerat felis suscipit congue. Donec fringilla dolor a tellus auctor, eu maximus eros tempor.
                     </Text>
                 </View> */}
-                <Button dark={true} theme={{ roundness: 20 }} contentStyle={{ height: 45 }} style={{ 'margin': 10, marginHorizontal: 25, 'marginBottom': 20, 'marginTop': 10 }} mode="contained" onPress={storeData}>
-                    Keluar
-                </Button>
+                <GlobalButton onPress={storeData} title={'Keluar'}  style={{ 'margin': 10, marginHorizontal: 25, 'marginBottom': 20, 'marginTop': 10 }}/>
             </ScrollView>
         </SafeAreaView>
     )

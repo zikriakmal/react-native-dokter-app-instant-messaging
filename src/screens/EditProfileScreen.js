@@ -74,11 +74,14 @@ const EditProfileScreen = () =>
                                     )
                                 } title="Ubah Foto" />
                             </View>
-                            <TextInput theme={{ roundness: 20 }} value={username} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'margin': 10, marginHorizontal: 20 }} />
-                            <TextInput theme={{ roundness: 20 }} value={phoneNumber} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'margin': 10, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} value={username} 
+                            onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ fontSize:14,'margin': 10, marginHorizontal: 20 }} />
+                            <TextInput theme={{ roundness: 20 }} value={phoneNumber} 
+                            onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" 
+                            label="Nomor Telfon" style={{fontSize:14, 'margin': 10, marginHorizontal: 20 }} />
                             <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
+                                secureTextEntry={passwordHide} style={{fontSize:14, 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
