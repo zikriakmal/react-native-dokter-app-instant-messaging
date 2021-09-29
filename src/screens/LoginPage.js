@@ -4,7 +4,7 @@ import
 {
     StyleSheet, View, Text, SafeAreaView, Image, KeyboardAvoidingView, Alert
 } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { Button, TextInput } from 'react-native-paper'
 import { MMKV } from 'react-native-mmkv';
 import { useDispatch } from 'react-redux'
@@ -57,22 +57,24 @@ const LoginPage = ({ navigation }) =>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "100%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Email" style={{ 'marginVertical': 10 }} onChangeText={(data) => { setEmail(data) }} />
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
+                            <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Email" style={{ 'marginVertical': 10 }} onChangeText={(data) => { setEmail(data) }} />
+                            <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'marginVertical': 5 }} right={<TextInput.Icon 
+                                secureTextEntry={passwordHide} style={{ 'marginVertical': 5 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
                             <Button dark={true}
                                 disabled={isLoading || (email == '' || password == '')}
-                                theme={{ roundness: 20 }} contentStyle={{ height: 45 }}
+                                theme={{ roundness: 15 }} contentStyle={{ height: 45 }}
                                 style={{ marginVertical: 20 }} mode="contained" onPress={storeData}>
                                 {isLoading ? "Loading..." : "Masuk"}
                             </Button>
-                            <Text onPress={() => { navigation.navigate('Register') }} style={{ paddingVertical: 20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
-                                Daftar Disini
-                            </Text>
+                            <RectButton  onPress={() => { navigation.navigate('Register') }}  >
+                                <Text style={{ paddingVertical: 20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'tomato' }}>
+                                    Daftar Disini
+                                </Text>
+                            </RectButton>
                         </View>
                     </View>
                 </ScrollView>

@@ -4,7 +4,7 @@ import
 {
     StyleSheet, View, Text, SafeAreaView, Image, KeyboardAvoidingView
 } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { TextInput } from 'react-native-paper'
 import GlobalButton from '../component/atoms/GlobalButton'
 import { Register } from '../services/auth.service'
@@ -52,7 +52,7 @@ const RegisterScreen = ({ navigation }) =>
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={{ height: '100%' }}>
                 <ScrollView >
-                    <View>
+                    <View style={{ marginHorizontal: 40 }}>
                         <View style={{ 'alignContent': 'center', 'alignItems': 'center' }}>
                             <Text style={{ 'alignContent': 'center', 'fontSize': 20, 'fontWeight': 'bold', 'margin': 5, marginTop: 30 }}>MESH-Teen </Text>
                             <Text style={{ 'alignContent': 'center', 'fontSize': 15, 'fontWeight': '100', 'margin': 1 }}>(Menstruation Hygiene for Teen)</Text>
@@ -60,21 +60,23 @@ const RegisterScreen = ({ navigation }) =>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "100%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'margin': 8, marginHorizontal: 20 }} />
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'margin': 8, marginHorizontal: 20 }} />
-                            <TextInput theme={{ roundness: 20 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'margin': 8, marginHorizontal: 20 }} />
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'marginTop': 10 }} />
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'marginTop': 10 }} />
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'marginTop': 10 }} />
+                            <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
+                                secureTextEntry={passwordHide} style={{ 'marginTop': 10 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center', marginBottom: 20 }}>
                             <GlobalButton onPress={storeData} title={isLoading ? 'Mohon menunggu...' : 'Daftar'} disabled={isLoading || (
                                 username == '' || phoneNumber == '' || email == '' || password == ''
-                            )} style={{ 'margin': 10 }} />
-                            <Text onPress={() => { navigation.navigate('Login') }} style={{ 'marginTop': 8, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'red' }}>
-                                Sudah daftar? Login Disini
-                            </Text>
+                            )} style={{ 'marginTop': 20 }} />
+                            <RectButton onPress={() => { navigation.navigate('Login') }} >
+                                <Text  style={{ paddingVertical:20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'tomato' }}>
+                                    Sudah daftar? Login Disini
+                                </Text>
+                            </RectButton>
                         </View>
                     </View>
                 </ScrollView>
