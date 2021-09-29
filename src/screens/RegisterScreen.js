@@ -60,19 +60,18 @@ const RegisterScreen = ({ navigation }) =>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "100%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'marginTop': 10 }} />
-                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'marginTop': 10 }} />
-                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'marginTop': 10 }} />
-                            <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Password"
-                                onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'marginTop': 10 }} right={<TextInput.Icon
-                                    name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ 'marginTop': 10,fontSize:12 }} />
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" label="Nomor Telfon" style={{ 'marginTop': 10,fontSize:12 }} />
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => setEmail(data)} dense mode="outlined" label="Email" style={{ 'marginTop': 10,fontSize:12 }} />
+                            <TextInput theme={{ roundness: 15 }} onChangeText={(data) => { setPassword(data) }} dense label="Password" mode="outlined" style={{ 'marginTop': 10,fontSize:12 }}  
+                                    secureTextEntry={passwordHide} right={
+                                    <TextInput.Icon name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />}/>
                         </View>
                         <View style={{ 'alignContent': 'center', marginBottom: 20 }}>
                             <GlobalButton onPress={storeData} title={isLoading ? 'Mohon menunggu...' : 'Daftar'} disabled={isLoading || (
                                 username == '' || phoneNumber == '' || email == '' || password == ''
                             )} style={{ 'marginTop': 20 }} />
-                            <RectButton onPress={() => { navigation.navigate('Login') }} >
+                            <RectButton onPress={() => { navigation.navigate('Login') }} style={{marginTop:10,borderRadius:15}} >
                                 <Text  style={{ paddingVertical:20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'tomato' }}>
                                     Sudah daftar? Login Disini
                                 </Text>

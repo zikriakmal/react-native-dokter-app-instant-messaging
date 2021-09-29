@@ -9,6 +9,7 @@ import { Button, TextInput } from 'react-native-paper'
 import { MMKV } from 'react-native-mmkv';
 import { useDispatch } from 'react-redux'
 import { Auth } from '../services/auth.service'
+import GlobalButton from '../component/atoms/GlobalButton'
 
 
 const LoginPage = ({ navigation }) =>
@@ -57,20 +58,17 @@ const LoginPage = ({ navigation }) =>
                             <Image source={require('../assets/ayodokter.png')} style={{ 'width': "100%", 'height': 200 }} />
                         </View>
                         <View>
-                            <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Email" style={{ 'marginVertical': 10 }} onChangeText={(data) => { setEmail(data) }} />
+                            <TextInput mode="outlined" theme={{ roundness: 15}} dense label="Email" style={{fontSize:12, 'marginVertical': 10 }} onChangeText={(data) => { setEmail(data) }} />
                             <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
-                                secureTextEntry={passwordHide} style={{ 'marginVertical': 5 }} right={<TextInput.Icon
+                                secureTextEntry={passwordHide} style={{fontSize:12, 'marginVertical': 5 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />
                         </View>
                         <View style={{ 'alignContent': 'center' }}>
-                            <Button dark={true}
+                            <GlobalButton onPress={storeData} title={isLoading ? "Loading..." : "Masuk"}
                                 disabled={isLoading || (email == '' || password == '')}
-                                theme={{ roundness: 15 }} contentStyle={{ height: 45 }}
-                                style={{ marginVertical: 20 }} mode="contained" onPress={storeData}>
-                                {isLoading ? "Loading..." : "Masuk"}
-                            </Button>
-                            <RectButton  onPress={() => { navigation.navigate('Register') }}  >
+                                style={{ 'marginTop': 20 }} />
+                            <RectButton onPress={() => { navigation.navigate('Register') }} style={{marginTop:10,borderRadius:15}} >
                                 <Text style={{ paddingVertical: 20, 'textAlign': 'center', 'textDecorationLine': 'underline', 'fontSize': 14, 'color': 'tomato' }}>
                                     Daftar Disini
                                 </Text>
