@@ -45,10 +45,10 @@ const AskDoctorScreen = () =>
     return (
         <SafeAreaView>
             <View style={{ padding: 10, display: 'flex', height: '100%' }}>
-
                 <View style={{ marginHorizontal: 20 }}>
                     <Text style={{ fontSize: 14 }}>Kamu bisa tanyakan pertanyaan seputar MESH</Text>
                     <TextInput
+                        theme={{roundness:15}}
                         multiline
                         mode="outlined"
                         value={question}

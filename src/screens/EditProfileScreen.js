@@ -46,7 +46,7 @@ const EditProfileScreen = () =>
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={{ height: '100%' }}>
                 <ScrollView >
-                    <View>
+                    <View style={{marginHorizontal:15}}>
                         <Image source={{ uri: filePath }}
                             style={{
                                 width: 150,
@@ -58,7 +58,7 @@ const EditProfileScreen = () =>
                                 alignSelf: 'center'
                             }} />
                         <View>
-                            <View style={{ paddingHorizontal: 120, marginTop: 10 }}>
+                            <View style={{ paddingHorizontal: 100, marginTop: 10 }}>
                                 <GlobalButton onPress={() =>
                                     ImagePicker.launchImageLibrary(
                                         {
@@ -74,12 +74,12 @@ const EditProfileScreen = () =>
                                     )
                                 } title="Ubah Foto" />
                             </View>
-                            <TextInput theme={{ roundness: 20 }} value={username} 
+                            <TextInput theme={{ roundness: 15 }} value={username} 
                             onChangeText={(data) => setUsername(data)} dense mode="outlined" label="Nama Lengkap" style={{ fontSize:14,'margin': 10, marginHorizontal: 20 }} />
-                            <TextInput theme={{ roundness: 20 }} value={phoneNumber} 
+                            <TextInput theme={{ roundness: 15 }} value={phoneNumber} 
                             onChangeText={(data) => setPhoneNumber(data)} dense mode="outlined" 
                             label="Nomor Telfon" style={{fontSize:14, 'margin': 10, marginHorizontal: 20 }} />
-                            <TextInput mode="outlined" theme={{ roundness: 20 }} dense label="Password"
+                            <TextInput mode="outlined" theme={{ roundness: 15 }} dense label="Password"
                                 onChangeText={(data) => { setPassword(data) }}
                                 secureTextEntry={passwordHide} style={{fontSize:14, 'margin': 10, marginHorizontal: 20 }} right={<TextInput.Icon
                                     name={passwordHide ? "eye" : "eye-off"} onPress={() => { setPasswordHide(!passwordHide) }} />} />

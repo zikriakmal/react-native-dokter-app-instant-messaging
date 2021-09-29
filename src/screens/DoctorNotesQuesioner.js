@@ -32,7 +32,7 @@ const DoctorNotesQuesioner = ({ navigation }) =>
 
                             <CompOption dt={dt} />
                             :
-                            <TextInput mode="outlined" key={dt.id} onChangeText={(data) =>
+                            <TextInput theme={{roundness:15}} mode="outlined" key={dt.id} onChangeText={(data) =>
                             {
                                 dt.answer = data;
                             }} />
