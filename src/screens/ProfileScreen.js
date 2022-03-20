@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler';
@@ -7,6 +7,7 @@ import { Button } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux'
 import GlobalButton from '../component/atoms/GlobalButton';
+import { GetInfo } from '../services/user.service';
 
 const HyperChild = ({ navigation }) =>
 {
@@ -25,6 +26,7 @@ const ProfileScreen = ({ navigation }) =>
     {
         MMKV.set('isLogin', false)
         MMKV.set('username', "")
+        MMKV.set('email',"")
         MMKV.set('access_token', "")
         dispatch({ type: 'SET_LOGIN' })
     }
@@ -35,8 +37,8 @@ const ProfileScreen = ({ navigation }) =>
                 <Text style={{ fontWeight: 'bold', fontSize: 20, marginHorizontal: 30 }}>Profil Pengguna</Text>
                 <View style={{ elevation: 10, borderRadius: 10, alignContent: 'center', alignItems: 'center', 'margin': 10, marginHorizontal: 25, 'padding': 30, 'backgroundColor': 'white', shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black' }} >
                     <View style={{ 'alignSelf': 'flex-end' }} >
-                        <RectButton onPress={() => { navigation.navigate('EditProfileScreen') }} style={{borderRadius:15,elevation:10,backgroundColor:'white'}}>
-                            <Ionicons name='pencil' style={{ fontSize: 20,padding:10, fontWeight: '900' }} />
+                        <RectButton onPress={() => { navigation.navigate('EditProfileScreen') }} style={{ borderRadius: 15, elevation: 10, backgroundColor: 'white' }}>
+                            <Ionicons name='pencil' style={{ fontSize: 20, padding: 10, fontWeight: '900' }} />
                         </RectButton>
                     </View>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', 'marginBottom': 20, 'color': 'tomato' }} > {MMKV.getString('username')} </Text>
@@ -65,7 +67,7 @@ const ProfileScreen = ({ navigation }) =>
                     <Text style={{ fontSize: 14, 'marginTop': 20 }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam luctus tincidunt erat non blandit. Nullam nec ipsum id erat imperdiet placerat. Integer pellentesque sit amet nibh id egestas. Fusce quis sollicitudin massa. Praesent a quam in velit posuere commodo. Morbi mattis nisi placerat felis suscipit congue. Donec fringilla dolor a tellus auctor, eu maximus eros tempor.
                     </Text>
                 </View> */}
-                <GlobalButton onPress={storeData} title={'Keluar'}  style={{ 'margin': 10, marginHorizontal: 25, 'marginBottom': 20, 'marginTop': 10 }}/>
+                <GlobalButton onPress={storeData} title={'Keluar'} style={{ 'margin': 10, marginHorizontal: 25, 'marginBottom': 20, 'marginTop': 10 }} />
             </ScrollView>
         </SafeAreaView>
     )

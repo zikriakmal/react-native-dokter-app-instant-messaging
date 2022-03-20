@@ -1,4 +1,4 @@
-package com.dokterapp;
+package com.mesh.teen;
 
 import com.facebook.react.bridge.JSIModuleSpec;
 import com.facebook.react.bridge.JavaScriptContextHolder;

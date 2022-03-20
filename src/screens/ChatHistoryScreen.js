@@ -6,6 +6,7 @@ import { useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 import { MMKV } from 'react-native-mmkv';
 import GlobalButton from '../component/atoms/GlobalButton';
+import { GetInfo } from '../services/user.service';
 
 
 // Buttons
@@ -31,6 +32,7 @@ const ChatHistoryScreen = ({ navigation }) =>
         // Subscribe to query with onSnapshot
         const unsubscribe = query.onSnapshot(querySnapshot =>
         {
+
             // Get all documents from collection - with IDs
             querySnapshot.docChanges().forEach((change) =>
             {
@@ -63,6 +65,17 @@ const ChatHistoryScreen = ({ navigation }) =>
                     return () => query2();
                 }
             });
+        });
+
+        GetInfo().then((data) =>
+        {
+
+            MMKV.set('userId', data.data.data.firebase_id);
+            MMKV.set('username', data.data.data.username);
+            MMKV.set('email', data.data.data.email);
+            MMKV.set('photoProfile', data.data.data.photo_path);
+            MMKV.set('phoneNumber', data.data.data.phone_number)
+            MMKV.set('type', data.data.data.member_type);
         });
         // Detach listener
         return () => unsubscribe();

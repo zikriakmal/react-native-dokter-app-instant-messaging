@@ -16,7 +16,6 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer, DefaultTheme, useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { firebase } from '../firebase';
 
 
@@ -26,7 +25,6 @@ import ProfileScreen from './screens/ProfileScreen';
 import LoginPage from './screens/LoginPage';
 
 import { Provider, useSelector } from 'react-redux';
-
 import ChatDetailScreen from './screens/ChatDetailScreen';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -90,37 +88,37 @@ const App = () =>
     return (
       <GuardedStack.Navigator>
         <GuardedStack.Screen name="HomeTab" component={TabScreen} options={{ headerShown: false, title: "" }} />
-        <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen} options={{title:'Buat Janji'}}  />
+        <GuardedStack.Screen name="AppointmentScreen" component={AppointmentScreen} options={{ title: 'Buat Janji' }} />
         <GuardedStack.Screen name="AppointmentDetail" component={AppointmentDetailScreen} options={({ route }) => ({ title: route.params.name })} />
 
-        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen}  options={({route})=>({title:'Pertanyaan'})} />
+        <GuardedStack.Screen name="AskDoctorScreen" component={AskDoctorScreen} options={({ route }) => ({ title: 'Pertanyaan' })} />
 
-        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen} options={({route})=>({title:'Quesioner'})}   />
-        <GuardedStack.Screen name="DoctorNotesQuesionerScreen" component={DoctorNotesQuesioner} options={({route})=>({title:'Quesioner'})}   />
-        
+        <GuardedStack.Screen name="DoctorNotesScreen" component={DoctorNotesScreen} options={({ route }) => ({ title: 'Quesioner' })} />
+        <GuardedStack.Screen name="DoctorNotesQuesionerScreen" component={DoctorNotesQuesioner} options={({ route }) => ({ title: 'Quesioner' })} />
+
         <GuardedStack.Screen name="ChatScreen" component={HomeScreen} options={{ headerShown: false }} />
         <GuardedStack.Screen name="ChatDetail" component={ChatDetailScreen} options={({ route }) => ({ title: route.params.name })} />
-        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{title:"Profil Dokter",headerTitleAlign:'center'}} h />
+        <GuardedStack.Screen name="DoctorDetailScreen" component={DoctorDetailScreen} options={{ title: "Profil Dokter", headerTitleAlign: 'center' }} h />
 
-        <GuardedStack.Screen name="FileScreen" component={FileScreen} options={{title:"Materi"}} />
+        <GuardedStack.Screen name="FileScreen" component={FileScreen} options={{ title: "Materi" }} />
 
-        <GuardedStack.Screen name="EditProfileScreen" component={EditProfileScreen} options={{title:"Edit Profile"}} />
+        <GuardedStack.Screen name="EditProfileScreen" component={EditProfileScreen} options={{ title: "Edit Profile" }} />
         {/* <GuardedStack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} /> */}
       </GuardedStack.Navigator>
     )
   }
 
 
-  const TabScreen = () =>
+  const TabScreen = ({ navigation }) =>
   {
     return (
       <Tab.Navigator
         activeColor="tomato"
         inactiveColor="grey"
-         
+
         barStyle={{
           backgroundColor: '#ffffff',
-          padding:5,
+          padding: 5,
           elevation: 24, shadowRadius: 5, shadowOpacity: 0.4, shadowOffset: { width: 2, height: -1 }, shadowColor: 'black'
         }}
         screenOptions={({ route }) => ({
@@ -142,8 +140,9 @@ const App = () =>
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}>
-        {MMKV.getNumber('type') == 1 ? <Tab.Screen name="HomeScreen" component={HomeScreen}  options={{tabBarLabel: 'Home'}} /> : null } 
-        <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{headerShown:true, tabBarLabel: 'Chats' }} />
+        {MMKV.getNumber('type') == 1 ? <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: 'Home' }} /> : null}
+        {/* {<Tab.Screen name="HomeScreen" component={HomeScreen} options={{ tabBarLabel: 'Home' }} />} */}
+        <Tab.Screen name="ChatScreen" component={ChatHistoryScreen} options={{ headerShown: true, tabBarLabel: 'Chats' }} />
         <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{ tabBarLabel: 'Profile' }} />
 
       </Tab.Navigator>
